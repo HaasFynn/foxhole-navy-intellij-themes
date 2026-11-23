@@ -9,12 +9,12 @@ import com.intellij.openapi.editor.EditorKind
 import javax.swing.Timer
 
 /**
- * Rising air bubbles in the editors of the Nakki theme.
+ * Rising air bubbles in the editors while a Warden Navy theme is active.
  * One timer drives all editors and only runs while the effect is switched on.
  */
 object Bubbles {
     private const val ENABLED_KEY = "io.github.haasfynn.wardennavy.bubbles"
-    private const val NAKKI_THEME_ID = "io.github.haasfynn.wardennavy.nakki"
+    private const val THEME_ID_PREFIX = "io.github.haasfynn.wardennavy."
     private const val FRAME_MILLIS = 66
 
     private val layers = HashMap<Editor, BubbleLayer>()
@@ -27,7 +27,7 @@ object Bubbles {
 
     private fun wanted(): Boolean =
         enabled && !PowerSaveMode.isEnabled() &&
-            LafManager.getInstance().currentUIThemeLookAndFeel?.id == NAKKI_THEME_ID
+            LafManager.getInstance().currentUIThemeLookAndFeel?.id.orEmpty().startsWith(THEME_ID_PREFIX)
 
     /** Brings the layers in line with the current theme and settings. Call on the event dispatch thread. */
     fun sync() {

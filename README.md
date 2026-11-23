@@ -16,7 +16,7 @@ Fan-made. Not affiliated with or endorsed by Siege Camp. All artwork in this rep
 - **Background artwork**: a sonar display with a warship or submarine, faint behind the code and stronger in the empty frame.
 - **Icons**: 45 nautical icons. Breakpoints are sea mines, folders are crates, tool windows get a sea chart, logbook, ship's bell, periscope and more. Platform icons take the palette colours.
 - **Progress bar**: a ship steaming along a waterline; indeterminate progress is a sonar pulse.
-- **Air bubbles** (Nakki): now and then a breath of small bubbles rises through the editor and bursts near the top.
+- **Air bubbles**: now and then a breath of small bubbles rises through the editor and bursts near the top.
 
 Progress bar and bubbles can be switched off under **Settings | Appearance & Behavior | Warden Navy**.
 

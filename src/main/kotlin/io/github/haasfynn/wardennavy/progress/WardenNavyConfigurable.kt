@@ -17,7 +17,7 @@ class WardenNavyConfigurable : BoundConfigurable("Warden Navy") {
         row {
             checkBox("Let air bubbles rise through the editor")
                 .bindSelected(Bubbles::enabled)
-                .comment("Nakki theme only. Paused in Power Save Mode.")
+                .comment("Only while a Warden Navy theme is active. Paused in Power Save Mode.")
         }
     }
 
