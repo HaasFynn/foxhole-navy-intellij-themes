@@ -4,15 +4,136 @@
   "author": "HaasFynn",
   "parentTheme": "Islands Dark",
   "editorScheme": "/themes/${fileName}.xml",
+
   "colors": {
-    "editorBg": "#${editorBg}",
-    "toolBg": "#${toolBg}",
-    "windowBg": "#${windowBg}",
-    "fg": "#${fg}",
-    "accent": "#${accent}"
+    ${rampColours},
+
+    "transparent": "#${editorBg}00",
+    "editor-text": "#${fg}",
+    "text-link": "#${link}",
+    "tool-window-bg": "#${toolBg}",
+    "tool-window-bg-inline": "#${raisedBg}",
+    "selection-bg-active": "#${selectionBg}",
+    "selection-bg-active-muted": "#${selectionInactiveBg}",
+    "selection-bg-inactive": "#${hoverBg}",
+    "tab-selected-bg-active": "#${tabSelectedBg}",
+    "tab-selected-border-active": "#${accent}",
+    "tab-file-color-mask-bg": "#${editorBg}80",
+    "popup-completion-match-text": "#${link}",
+    "search-match-bg": "#${searchMatchBg}",
+    "tree-indent-guide-border": "#${border}",
+    "text-error": "#${red}",
+    "text-warning": "#${amber}",
+    "text-success": "#${green}",
+    "icon-green-stroke": "#${green}",
+
+    "accent": "#${accent}",
+    "accentSoft": "#${accentSoft}",
+    "brass": "#${brass}",
+    "wood": "#${wood}"
   },
+
   "ui": {
-    "MainWindow.background": "windowBg",
-    "ToolWindow.background": "toolBg"
+    "ProgressBar": {
+      "progressColor": "accent",
+      "indeterminateStartColor": "accentSoft",
+      "indeterminateEndColor": "accent",
+      "passedColor": "#${green}",
+      "failedColor": "#${red}",
+      "warningColor": "#${amber}"
+    },
+
+    "ScrollBar": {
+      "thumbColor": "#${accentSoft}59",
+      "thumbBorderColor": "#${editorBg}59",
+      "hoverThumbColor": "#${accentSoft}8C",
+      "hoverThumbBorderColor": "#${editorBg}8C",
+      "trackColor": "#${accentSoft}00",
+      "hoverTrackColor": "#${accentSoft}00",
+      "Transparent": {
+        "thumbColor": "#${accentSoft}59",
+        "thumbBorderColor": "#${editorBg}00",
+        "hoverThumbColor": "#${accentSoft}8C",
+        "hoverThumbBorderColor": "#${editorBg}8C",
+        "trackColor": "#${accentSoft}00",
+        "hoverTrackColor": "#${accentSoft}1A"
+      }
+    },
+
+    "Slider": {
+      "buttonColor": "#${fgMuted}",
+      "buttonBorderColor": "#${windowBg}",
+      "tickColor": "#${fgMuted}",
+      "trackColor": "#${fgDisabled}"
+    },
+
+    "DragAndDrop": {
+      "rowBackground": "#${accent}26",
+      "areaBackground": "#${fg}10"
+    },
+    "ToolWindow": {
+      "Button.DragAndDrop.buttonDropBackground": "#${accent}80",
+      "DragAndDrop.areaBackground": "#${accent}4D"
+    },
+
+    "Editor.ToolTip.selectionBackground": "#${hoverBg}",
+    "List.Tag": {
+      "background": "#${border}",
+      "foreground": "#${fgMuted}"
+    },
+    "MemoryIndicator.usedBackground": "#${accentFill}80",
+    "MainWindow.Tab.background": "#${editorBg}",
+    "WelcomeScreen.Projects.actions.background": "#${windowBg}",
+    "HelpBrowser.titleHighlightForeground": "#${link}",
+    "DataSummary.Chart.barColor": "#${accent}",
+    "Lesson.shortcutBackground": "#${border}",
+
+    "Debugger.Variables": {
+      "valueForeground": "#${wood}",
+      "changedValueForeground": "#${link}",
+      "modifyingValueForeground": "#${link}",
+      "typeForeground": "#${fgDisabled}",
+      "collectingDataForeground": "#${fgDisabled}",
+      "evaluatingExpressionForeground": "#${fgDisabled}"
+    },
+
+    "Review": {
+      "Branch.Background": "#${border}",
+      "Branch.Background.Hover": "#${hoverBg}",
+      "State.Background": "#${hoverBg}",
+      "State.Foreground": "#${fgMuted}"
+    },
+
+    "VersionControl": {
+      "Log.Commit": {
+        "currentBranchBackground": "#${currentBranchBg}",
+        "unmatchedForeground": "#${fgDisabled}",
+        "Reference.foreground": "#${fgDisabled}"
+      },
+      "FileHistory.Commit.selectedBranchBackground": "#${currentBranchBg}",
+      "MarkerPopup.borderColor": "#${border}",
+      "GitLog": {
+        "headIconColor": "#${brass}",
+        "localBranchIconColor": "#${green}",
+        "remoteBranchIconColor": "#${violet}",
+        "tagIconColor": "#${fgMuted}",
+        "otherIconColor": "#${fgMuted}"
+      },
+      "Merge.Status.NoConflicts.foreground": "#${green}"
+    },
+
+    "FileColor": {
+      "Yellow": "#${fileYellow}",
+      "Green": "#${fileGreen}",
+      "Orange": "#${fileOrange}",
+      "Rose": "#${fileRose}",
+      "Violet": "#${fileViolet}",
+      "Blue": "#${fileBlue}",
+      "Gray": "#${fileGray}"
+    }
+  },
+
+  "icons": {
+    "ColorPalette": {}
   }
 }
