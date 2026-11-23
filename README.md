@@ -9,6 +9,15 @@ Two dark IntelliJ Platform themes inspired by the Warden navy of the game Foxhol
 
 Fan-made. Not affiliated with or endorsed by Siege Camp. All artwork in this repository is original.
 
+## What is themed
+
+- **IDE chrome**: every component, recoloured through the colour ramps of the parent theme *Islands Dark*.
+- **Editor colour scheme**: syntax, inspections, diff, VCS, debugger, console and terminal colours.
+- **Background artwork**: a sonar display with a warship or submarine in the empty frame, bow stripes behind the editor.
+- **Icons**: palette-coloured platform icons, a helm for Settings, an anchor for Bookmarks, pennants as tree arrows.
+- **Progress bar**: a ship steaming along a waterline; indeterminate progress is a sonar pulse.
+  Switch it off under **Settings | Appearance & Behavior | Warden Navy**.
+
 ## Build
 
 Requires JDK 25.
