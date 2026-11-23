@@ -1,12 +1,957 @@
 <scheme name="${themeName}" version="142" parent_scheme="Darcula">
   <colors>
+    <option name="CARET_COLOR" value="${fg}"/>
     <option name="CARET_ROW_COLOR" value="${caretRow}"/>
+    <option name="SELECTION_BACKGROUND" value="${selectionBg}"/>
+    <option name="SELECTION_FOREGROUND" value=""/>
+    <option name="EDITOR_GUTTER_BACKGROUND" value=""/>
+    <option name="CONSOLE_BACKGROUND_KEY" value="${editorBg}"/>
+    <option name="LINE_NUMBERS_COLOR" value="${lineNumber}"/>
+    <option name="LINE_NUMBER_ON_CARET_ROW_COLOR" value="${lineNumberActive}"/>
+    <option name="INDENT_GUIDE" value="${indentGuide}"/>
+    <option name="SELECTED_INDENT_GUIDE" value="${fgDisabled}"/>
+    <option name="MATCHED_BRACES_INDENT_GUIDE_COLOR" value="${fgDisabled}"/>
+    <option name="VISUAL_INDENT_GUIDE" value="${indentGuide}"/>
+    <option name="RIGHT_MARGIN_COLOR" value="${indentGuide}"/>
+    <option name="METHOD_SEPARATORS_COLOR" value="${border}"/>
+    <option name="WHITESPACES" value="${fgDisabled}"/>
+    <option name="FOLDED_TEXT_BORDER_COLOR" value="${border}"/>
+    <option name="DIFF_SEPARATORS_BACKGROUND" value="${raisedBg}"/>
+    <option name="DOCUMENTATION_COLOR" value="${raisedBg}"/>
+    <option name="LOOKUP_COLOR" value="${raisedBg}"/>
+    <option name="RECENT_LOCATIONS_SELECTION" value="${hoverBg}"/>
+    <option name="DOC_COMMENT_GUIDE" value="${docGuide}"/>
+    <option name="DOC_COMMENT_LINK" value="${link}"/>
+    <option name="HINT_BORDER" value="${border}"/>
+    <option name="INFORMATION_HINT" value="${windowBg}"/>
+    <option name="QUESTION_HINT" value="${notificationBg}"/>
+    <option name="ERROR_HINT" value="${errorHintBg}"/>
+    <option name="NOTIFICATION_BACKGROUND" value="${notificationBg}"/>
+    <option name="PROMOTION_PANE" value="${notificationBg}"/>
+    <option name="INLINE_REFACTORING_SETTINGS_DEFAULT" value="${border}"/>
+    <option name="INLINE_REFACTORING_SETTINGS_FOCUSED" value="${hoverBg}"/>
+    <option name="INLINE_REFACTORING_SETTINGS_HOVERED" value="${hoverBg}"/>
+
+    <option name="ADDED_LINES_COLOR" value="${vcsAdded}"/>
+    <option name="MODIFIED_LINES_COLOR" value="${vcsModified}"/>
+    <option name="DELETED_LINES_COLOR" value="${vcsDeleted}"/>
+    <option name="WHITESPACES_MODIFIED_LINES_COLOR" value="${whitespaceModified}"/>
+    <option name="IGNORED_ADDED_LINES_BORDER_COLOR" value="${vcsAdded}"/>
+    <option name="IGNORED_MODIFIED_LINES_BORDER_COLOR" value="${vcsModified}"/>
+    <option name="IGNORED_DELETED_LINES_BORDER_COLOR" value="${vcsDeleted}"/>
+    <option name="ANNOTATIONS_COLOR" value="${fgMuted}"/>
+    <option name="ANNOTATIONS_LAST_COMMIT_COLOR" value="${fg}"/>
+    <option name="VCS_ANNOTATIONS_COLOR_1" value="${annotation1}"/>
+    <option name="VCS_ANNOTATIONS_COLOR_2" value="${annotation2}"/>
+    <option name="VCS_ANNOTATIONS_COLOR_3" value="${annotation3}"/>
+    <option name="VCS_ANNOTATIONS_COLOR_4" value="${annotation4}"/>
+    <option name="VCS_ANNOTATIONS_COLOR_5" value="${annotation5}"/>
+
+    <option name="FILESTATUS_ADDED" value="${green}"/>
+    <option name="FILESTATUS_COPIED" value="${green}"/>
+    <option name="FILESTATUS_addedOutside" value="${green}"/>
+    <option name="FILESTATUS_MODIFIED" value="${link}"/>
+    <option name="FILESTATUS_RENAMED" value="${link}"/>
+    <option name="FILESTATUS_modifiedOutside" value="${link}"/>
+    <option name="FILESTATUS_NOT_CHANGED_IMMEDIATE" value="${link}"/>
+    <option name="FILESTATUS_NOT_CHANGED_RECURSIVE" value="${link}"/>
+    <option name="FILESTATUS_DELETED" value="${fgDisabled}"/>
+    <option name="FILESTATUS_IDEA_FILESTATUS_DELETED_FROM_FILE_SYSTEM" value="${fgDisabled}"/>
+    <option name="FILESTATUS_IDEA_FILESTATUS_IGNORED" value="${wood}"/>
+    <option name="FILESTATUS_UNKNOWN" value="${red}"/>
+    <option name="FILESTATUS_MERGED" value="${violet}"/>
+    <option name="FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_CONFLICTS" value="${red}"/>
+    <option name="FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_BOTH_CONFLICTS" value="${red}"/>
+    <option name="FILESTATUS_IDEA_FILESTATUS_MERGED_WITH_PROPERTY_CONFLICTS" value="${red}"/>
+    <option name="FILESTATUS_changelistConflict" value="${red}"/>
+
+    <option name="ScrollBar.Mac.thumbColor" value="${accentSoft}59"/>
+    <option name="ScrollBar.Mac.hoverThumbColor" value="${accentSoft}8C"/>
   </colors>
   <attributes>
+    <!-- General -->
     <option name="TEXT">
       <value>
         <option name="FOREGROUND" value="${fg}"/>
         <option name="BACKGROUND" value="${editorBg}"/>
+      </value>
+    </option>
+    <option name="FOLDED_TEXT_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="${fgMuted}"/>
+        <option name="BACKGROUND" value="${border}"/>
+      </value>
+    </option>
+    <option name="MATCHED_BRACE_ATTRIBUTES">
+      <value>
+        <option name="BACKGROUND" value="${hoverBg}"/>
+        <option name="FONT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="UNMATCHED_BRACE_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="${red}"/>
+      </value>
+    </option>
+    <option name="MATCHED_TAG_NAME">
+      <value>
+        <option name="BACKGROUND" value="${hoverBg}"/>
+      </value>
+    </option>
+    <option name="IDENTIFIER_UNDER_CARET_ATTRIBUTES">
+      <value>
+        <option name="BACKGROUND" value="${identifierBg}"/>
+        <option name="ERROR_STRIPE_COLOR" value="${accentSoft}"/>
+      </value>
+    </option>
+    <option name="WRITE_IDENTIFIER_UNDER_CARET_ATTRIBUTES">
+      <value>
+        <option name="BACKGROUND" value="${writeIdentifierBg}"/>
+        <option name="ERROR_STRIPE_COLOR" value="${wood}"/>
+      </value>
+    </option>
+    <option name="SEARCH_RESULT_ATTRIBUTES">
+      <value>
+        <option name="BACKGROUND" value="${searchBg}"/>
+        <option name="ERROR_STRIPE_COLOR" value="${brass}"/>
+      </value>
+    </option>
+    <option name="WRITE_SEARCH_RESULT_ATTRIBUTES">
+      <value>
+        <option name="BACKGROUND" value="${writeSearchBg}"/>
+        <option name="ERROR_STRIPE_COLOR" value="${red}"/>
+      </value>
+    </option>
+    <option name="TEXT_SEARCH_RESULT_ATTRIBUTES">
+      <value>
+        <option name="BACKGROUND" value="${textSearchBg}"/>
+        <option name="EFFECT_COLOR" value="${cyan}"/>
+        <option name="ERROR_STRIPE_COLOR" value="${cyan}"/>
+      </value>
+    </option>
+    <option name="HYPERLINK_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="${link}"/>
+        <option name="EFFECT_COLOR" value="${link}"/>
+        <option name="EFFECT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="FOLLOWED_HYPERLINK_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="${violet}"/>
+        <option name="EFFECT_COLOR" value="${violet}"/>
+        <option name="EFFECT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="CTRL_CLICKABLE">
+      <value>
+        <option name="FOREGROUND" value="${link}"/>
+        <option name="EFFECT_COLOR" value="${link}"/>
+        <option name="EFFECT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="INACTIVE_HYPERLINK_ATTRIBUTES">
+      <value>
+        <option name="EFFECT_COLOR" value="${fgDisabled}"/>
+        <option name="EFFECT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="DEFAULT_HIGHLIGHTED_REFERENCE">
+      <value>
+        <option name="EFFECT_COLOR" value="${fgDisabled}"/>
+        <option name="EFFECT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="INJECTED_LANGUAGE_FRAGMENT">
+      <value>
+        <option name="BACKGROUND" value="${injectedBg}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_TEMPLATE_LANGUAGE_COLOR">
+      <value>
+        <option name="BACKGROUND" value="${raisedBg}"/>
+      </value>
+    </option>
+    <option name="TODO_DEFAULT_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="${amber}"/>
+        <option name="FONT_TYPE" value="2"/>
+        <option name="ERROR_STRIPE_COLOR" value="${amber}"/>
+      </value>
+    </option>
+    <option name="BOOKMARKS_ATTRIBUTES">
+      <value>
+        <option name="ERROR_STRIPE_COLOR" value="${brass}"/>
+      </value>
+    </option>
+    <option name="LIVE_TEMPLATE_ATTRIBUTES">
+      <value>
+        <option name="EFFECT_COLOR" value="${accent}"/>
+      </value>
+    </option>
+    <option name="LIVE_TEMPLATE_INACTIVE_SEGMENT">
+      <value>
+        <option name="EFFECT_COLOR" value="${fgMuted}"/>
+      </value>
+    </option>
+    <option name="TEMPLATE_VARIABLE_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="${violet}"/>
+      </value>
+    </option>
+    <option name="CODE_LENS_BORDER_COLOR">
+      <value>
+        <option name="EFFECT_COLOR" value="${border}"/>
+      </value>
+    </option>
+
+    <!-- Inlays and breadcrumbs -->
+    <option name="INLAY_DEFAULT">
+      <value>
+        <option name="FOREGROUND" value="${fgMuted}"/>
+        <option name="BACKGROUND" value="${raisedBg}"/>
+      </value>
+    </option>
+    <option name="INLAY_TEXT_WITHOUT_BACKGROUND">
+      <value>
+        <option name="FOREGROUND" value="${synComment}"/>
+      </value>
+    </option>
+    <option name="INLINE_PARAMETER_HINT">
+      <value>
+        <option name="FOREGROUND" value="${fgMuted}"/>
+        <option name="BACKGROUND" value="${raisedBg}"/>
+      </value>
+    </option>
+    <option name="INLINE_PARAMETER_HINT_HIGHLIGHTED">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+        <option name="BACKGROUND" value="${hoverBg}"/>
+      </value>
+    </option>
+    <option name="INLINE_PARAMETER_HINT_CURRENT">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+        <option name="BACKGROUND" value="${selectionBg}"/>
+      </value>
+    </option>
+    <option name="BREADCRUMBS_DEFAULT">
+      <value>
+        <option name="FOREGROUND" value="${fgMuted}"/>
+      </value>
+    </option>
+    <option name="BREADCRUMBS_INACTIVE">
+      <value>
+        <option name="FOREGROUND" value="${fgDisabled}"/>
+      </value>
+    </option>
+    <option name="BREADCRUMBS_HOVERED">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+        <option name="BACKGROUND" value="${hoverBg}"/>
+      </value>
+    </option>
+    <option name="BREADCRUMBS_CURRENT">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+        <option name="BACKGROUND" value="${hoverBg}"/>
+      </value>
+    </option>
+    <option name="DOC_CODE_BLOCK">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+        <option name="BACKGROUND" value="${editorBg}"/>
+        <option name="EFFECT_COLOR" value="${border}"/>
+      </value>
+    </option>
+    <option name="DOC_CODE_INLINE">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+        <option name="BACKGROUND" value="${hoverBg}"/>
+      </value>
+    </option>
+    <option name="DOC_TIPS_SHORTCUT">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+        <option name="EFFECT_COLOR" value="${fgDisabled}"/>
+      </value>
+    </option>
+
+    <!-- Language defaults -->
+    <option name="DEFAULT_KEYWORD">
+      <value>
+        <option name="FOREGROUND" value="${synKeyword}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_STRING">
+      <value>
+        <option name="FOREGROUND" value="${synString}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_VALID_STRING_ESCAPE">
+      <value>
+        <option name="FOREGROUND" value="${synEscape}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_INVALID_STRING_ESCAPE">
+      <value>
+        <option name="FOREGROUND" value="${synEscape}"/>
+        <option name="EFFECT_COLOR" value="${red}"/>
+        <option name="EFFECT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="DEFAULT_NUMBER">
+      <value>
+        <option name="FOREGROUND" value="${synNumber}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_LINE_COMMENT">
+      <value>
+        <option name="FOREGROUND" value="${synComment}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_BLOCK_COMMENT">
+      <value>
+        <option name="FOREGROUND" value="${synComment}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_DOC_COMMENT">
+      <value>
+        <option name="FOREGROUND" value="${synDoc}"/>
+        <option name="FONT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="DEFAULT_DOC_COMMENT_TAG">
+      <value>
+        <option name="FOREGROUND" value="${synDoc}"/>
+        <option name="FONT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="DEFAULT_DOC_COMMENT_TAG_VALUE">
+      <value>
+        <option name="FOREGROUND" value="${fgMuted}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_DOC_MARKUP">
+      <value>
+        <option name="FOREGROUND" value="${synDoc}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_OPERATION_SIGN">
+      <value>
+        <option name="FOREGROUND" value="${synOperator}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_BRACES">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_BRACKETS">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_PARENTHS">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_COMMA">
+      <value>
+        <option name="FOREGROUND" value="${synOperator}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_DOT">
+      <value>
+        <option name="FOREGROUND" value="${synOperator}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_SEMICOLON">
+      <value>
+        <option name="FOREGROUND" value="${synOperator}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_CLASS_NAME">
+      <value>
+        <option name="FOREGROUND" value="${synType}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_CLASS_REFERENCE">
+      <value>
+        <option name="FOREGROUND" value="${synType}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_INTERFACE_NAME">
+      <value>
+        <option name="FOREGROUND" value="${synType}"/>
+        <option name="FONT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="TYPE_PARAMETER_NAME_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="${cyan}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_FUNCTION_DECLARATION">
+      <value>
+        <option name="FOREGROUND" value="${synFunction}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_FUNCTION_CALL" baseAttributes="DEFAULT_IDENTIFIER"/>
+    <option name="DEFAULT_INSTANCE_METHOD">
+      <value>
+        <option name="FOREGROUND" value="${synFunction}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_STATIC_METHOD">
+      <value>
+        <option name="FOREGROUND" value="${synFunction}"/>
+        <option name="FONT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="DEFAULT_INSTANCE_FIELD">
+      <value>
+        <option name="FOREGROUND" value="${synField}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_STATIC_FIELD">
+      <value>
+        <option name="FOREGROUND" value="${synConstant}"/>
+        <option name="FONT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="DEFAULT_CONSTANT">
+      <value>
+        <option name="FOREGROUND" value="${synConstant}"/>
+        <option name="FONT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="DEFAULT_GLOBAL_VARIABLE">
+      <value>
+        <option name="FOREGROUND" value="${synConstant}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_PREDEFINED_SYMBOL">
+      <value>
+        <option name="FOREGROUND" value="${synKeyword}"/>
+        <option name="FONT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="DEFAULT_REASSIGNED_LOCAL_VARIABLE">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+        <option name="EFFECT_COLOR" value="${fgDisabled}"/>
+        <option name="EFFECT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="DEFAULT_REASSIGNED_PARAMETER">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+        <option name="EFFECT_COLOR" value="${fgDisabled}"/>
+        <option name="EFFECT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="DEFAULT_METADATA">
+      <value>
+        <option name="FOREGROUND" value="${synMeta}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_LABEL">
+      <value>
+        <option name="FOREGROUND" value="${cyan}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_TAG">
+      <value>
+        <option name="FOREGROUND" value="${synTag}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_ATTRIBUTE">
+      <value>
+        <option name="FOREGROUND" value="${synAttr}"/>
+      </value>
+    </option>
+    <option name="DEFAULT_ENTITY">
+      <value>
+        <option name="FOREGROUND" value="${synEscape}"/>
+      </value>
+    </option>
+    <option name="IMPLICIT_ANONYMOUS_CLASS_PARAMETER_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="${synField}"/>
+        <option name="EFFECT_COLOR" value="${synField}"/>
+        <option name="EFFECT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="ANNOTATION_NAME_ATTRIBUTES" baseAttributes="DEFAULT_METADATA"/>
+
+    <!-- Markup and other languages -->
+    <option name="XML_PROLOGUE">
+      <value>
+        <option name="FOREGROUND" value="${fgMuted}"/>
+      </value>
+    </option>
+    <option name="XML_TAG">
+      <value>
+        <option name="FOREGROUND" value="${synTag}"/>
+      </value>
+    </option>
+    <option name="XML_TAG_NAME">
+      <value>
+        <option name="FOREGROUND" value="${synTag}"/>
+      </value>
+    </option>
+    <option name="XML_ATTRIBUTE_NAME">
+      <value>
+        <option name="FOREGROUND" value="${synAttr}"/>
+      </value>
+    </option>
+    <option name="XML_ENTITY_REFERENCE">
+      <value>
+        <option name="FOREGROUND" value="${synEscape}"/>
+      </value>
+    </option>
+    <option name="XML_CUSTOM_TAG_NAME">
+      <value>
+        <option name="FOREGROUND" value="${synType}"/>
+      </value>
+    </option>
+    <option name="HTML_TAG">
+      <value>
+        <option name="FOREGROUND" value="${synTag}"/>
+      </value>
+    </option>
+    <option name="HTML_TAG_NAME">
+      <value>
+        <option name="FOREGROUND" value="${synTag}"/>
+      </value>
+    </option>
+    <option name="HTML_CUSTOM_TAG_NAME">
+      <value>
+        <option name="FOREGROUND" value="${synType}"/>
+      </value>
+    </option>
+    <option name="HTML_ENTITY_REFERENCE">
+      <value>
+        <option name="FOREGROUND" value="${synEscape}"/>
+      </value>
+    </option>
+    <option name="HTML_ATTRIBUTE_VALUE" baseAttributes="DEFAULT_STRING"/>
+    <option name="CSS.COLOR">
+      <value>
+        <option name="FOREGROUND" value="${synNumber}"/>
+      </value>
+    </option>
+    <option name="CSS.IMPORTANT">
+      <value>
+        <option name="FOREGROUND" value="${red}"/>
+        <option name="FONT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="CSS.URL">
+      <value>
+        <option name="FOREGROUND" value="${link}"/>
+      </value>
+    </option>
+    <option name="JS.GLOBAL_VARIABLE">
+      <value>
+        <option name="FOREGROUND" value="${synConstant}"/>
+      </value>
+    </option>
+    <option name="JS.GLOBAL_FUNCTION" baseAttributes="DEFAULT_FUNCTION_DECLARATION"/>
+    <option name="JS.INSTANCE_MEMBER_FUNCTION">
+      <value>
+        <option name="FOREGROUND" value="${synFunction}"/>
+      </value>
+    </option>
+    <option name="JS.REGEXP">
+      <value>
+        <option name="FOREGROUND" value="${cyan}"/>
+      </value>
+    </option>
+    <option name="KOTLIN_LABEL">
+      <value>
+        <option name="FOREGROUND" value="${cyan}"/>
+      </value>
+    </option>
+    <option name="KOTLIN_NAMED_ARGUMENT">
+      <value>
+        <option name="FOREGROUND" value="${synAttr}"/>
+      </value>
+    </option>
+    <option name="KOTLIN_MUTABLE_VARIABLE">
+      <value>
+        <option name="EFFECT_COLOR" value="${fgDisabled}"/>
+        <option name="EFFECT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="KOTLIN_SMART_CAST_VALUE">
+      <value>
+        <option name="BACKGROUND" value="${smartCastBg}"/>
+      </value>
+    </option>
+    <option name="KOTLIN_SMART_CAST_RECEIVER">
+      <value>
+        <option name="BACKGROUND" value="${smartCastBg}"/>
+      </value>
+    </option>
+    <option name="KOTLIN_SMART_CONSTANT">
+      <value>
+        <option name="BACKGROUND" value="${smartCastBg}"/>
+      </value>
+    </option>
+    <option name="PROPERTIES.KEY">
+      <value>
+        <option name="FOREGROUND" value="${synKeyword}"/>
+      </value>
+    </option>
+    <option name="REGEXP.CHAR_CLASS">
+      <value>
+        <option name="FOREGROUND" value="${synMeta}"/>
+      </value>
+    </option>
+    <option name="MARKDOWN_LINK_TEXT">
+      <value>
+        <option name="FOREGROUND" value="${link}"/>
+        <option name="EFFECT_COLOR" value="${link}"/>
+        <option name="EFFECT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="MARKDOWN_AUTO_LINK">
+      <value>
+        <option name="FOREGROUND" value="${link}"/>
+        <option name="EFFECT_COLOR" value="${link}"/>
+        <option name="EFFECT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="CUSTOM_KEYWORD1_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="${synKeyword}"/>
+      </value>
+    </option>
+    <option name="CUSTOM_KEYWORD2_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="${synConstant}"/>
+      </value>
+    </option>
+    <option name="CUSTOM_KEYWORD3_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="${synType}"/>
+      </value>
+    </option>
+    <option name="CUSTOM_KEYWORD4_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="${synMeta}"/>
+      </value>
+    </option>
+
+    <!-- Problems -->
+    <option name="ERRORS_ATTRIBUTES">
+      <value>
+        <option name="EFFECT_COLOR" value="${red}"/>
+        <option name="ERROR_STRIPE_COLOR" value="${red}"/>
+        <option name="EFFECT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="WARNING_ATTRIBUTES">
+      <value>
+        <option name="EFFECT_COLOR" value="${amber}"/>
+        <option name="ERROR_STRIPE_COLOR" value="${amber}"/>
+        <option name="EFFECT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="INFO_ATTRIBUTES">
+      <value>
+        <option name="EFFECT_COLOR" value="${fgDisabled}"/>
+        <option name="EFFECT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="TYPO">
+      <value>
+        <option name="EFFECT_COLOR" value="${green}"/>
+        <option name="EFFECT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="RUNTIME_ERROR">
+      <value>
+        <option name="EFFECT_COLOR" value="${amber}"/>
+        <option name="ERROR_STRIPE_COLOR" value="${red}"/>
+        <option name="EFFECT_TYPE" value="5"/>
+      </value>
+    </option>
+    <option name="TEXT_STYLE_ERROR">
+      <value>
+        <option name="EFFECT_COLOR" value="${red}"/>
+        <option name="EFFECT_TYPE" value="5"/>
+      </value>
+    </option>
+    <option name="TEXT_STYLE_WARNING">
+      <value>
+        <option name="EFFECT_COLOR" value="${amber}"/>
+        <option name="EFFECT_TYPE" value="5"/>
+      </value>
+    </option>
+    <option name="WRONG_REFERENCES_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="${red}"/>
+      </value>
+    </option>
+    <option name="BAD_CHARACTER">
+      <value>
+        <option name="FOREGROUND" value="${red}"/>
+        <option name="EFFECT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="NOT_USED_ELEMENT_ATTRIBUTES">
+      <value>
+        <option name="FOREGROUND" value="${synComment}"/>
+      </value>
+    </option>
+    <option name="DEPRECATED_ATTRIBUTES">
+      <value>
+        <option name="EFFECT_COLOR" value="${fgMuted}"/>
+        <option name="EFFECT_TYPE" value="3"/>
+      </value>
+    </option>
+    <option name="MARKED_FOR_REMOVAL_ATTRIBUTES">
+      <value>
+        <option name="EFFECT_COLOR" value="${red}"/>
+        <option name="EFFECT_TYPE" value="3"/>
+      </value>
+    </option>
+
+    <!-- Diff -->
+    <option name="DIFF_INSERTED">
+      <value>
+        <option name="BACKGROUND" value="${diffAddBg}"/>
+        <option name="ERROR_STRIPE_COLOR" value="${vcsAdded}"/>
+      </value>
+    </option>
+    <option name="DIFF_MODIFIED">
+      <value>
+        <option name="BACKGROUND" value="${diffModBg}"/>
+        <option name="ERROR_STRIPE_COLOR" value="${vcsModified}"/>
+      </value>
+    </option>
+    <option name="DIFF_DELETED">
+      <value>
+        <option name="BACKGROUND" value="${diffDelBg}"/>
+        <option name="ERROR_STRIPE_COLOR" value="${vcsDeleted}"/>
+      </value>
+    </option>
+    <option name="DIFF_CONFLICT">
+      <value>
+        <option name="BACKGROUND" value="${diffConflictBg}"/>
+        <option name="ERROR_STRIPE_COLOR" value="${amber}"/>
+      </value>
+    </option>
+
+    <!-- Debugger and coverage -->
+    <option name="BREAKPOINT_ATTRIBUTES">
+      <value>
+        <option name="BACKGROUND" value="${breakpointBg}"/>
+        <option name="ERROR_STRIPE_COLOR" value="${red}"/>
+      </value>
+    </option>
+    <option name="EXECUTIONPOINT_ATTRIBUTES">
+      <value>
+        <option name="BACKGROUND" value="${executionBg}"/>
+      </value>
+    </option>
+    <option name="NOT_TOP_FRAME_ATTRIBUTES">
+      <value>
+        <option name="BACKGROUND" value="${frameBg}"/>
+      </value>
+    </option>
+    <option name="DEBUGGER_INLINED_VALUES_EXECUTION_LINE">
+      <value>
+        <option name="FOREGROUND" value="${fgMuted}"/>
+        <option name="FONT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="DEBUGGER_INLINED_VALUES_MODIFIED">
+      <value>
+        <option name="FOREGROUND" value="${brass}"/>
+        <option name="FONT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="LINE_FULL_COVERAGE">
+      <value>
+        <option name="FOREGROUND" value="${coverageFull}"/>
+        <option name="FONT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="LINE_PARTIAL_COVERAGE">
+      <value>
+        <option name="FOREGROUND" value="${coveragePartial}"/>
+        <option name="FONT_TYPE" value="1"/>
+      </value>
+    </option>
+    <option name="LINE_NONE_COVERAGE">
+      <value>
+        <option name="FOREGROUND" value="${coverageNone}"/>
+        <option name="FONT_TYPE" value="1"/>
+      </value>
+    </option>
+
+    <!-- Console -->
+    <option name="CONSOLE_NORMAL_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_SYSTEM_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${fgMuted}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_ERROR_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${red}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_USER_INPUT">
+      <value>
+        <option name="FOREGROUND" value="${green}"/>
+        <option name="FONT_TYPE" value="2"/>
+      </value>
+    </option>
+    <option name="CONSOLE_RANGE_TO_EXECUTE">
+      <value>
+        <option name="EFFECT_COLOR" value="${green}"/>
+      </value>
+    </option>
+    <option name="LOG_ERROR_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${red}"/>
+      </value>
+    </option>
+    <option name="LOG_WARNING_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${amber}"/>
+      </value>
+    </option>
+    <option name="LOG_INFO_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${fg}"/>
+      </value>
+    </option>
+    <option name="LOG_VERBOSE_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${fgMuted}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_BLACK_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiBlack}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_RED_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiRed}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_GREEN_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiGreen}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_YELLOW_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiYellow}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_BLUE_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiBlue}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_MAGENTA_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiMagenta}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_CYAN_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiCyan}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_GRAY_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiWhite}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_DARKGRAY_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiBrightBlack}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_RED_BRIGHT_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiBrightRed}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_GREEN_BRIGHT_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiBrightGreen}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_YELLOW_BRIGHT_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiBrightYellow}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_BLUE_BRIGHT_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiBrightBlue}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_MAGENTA_BRIGHT_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiBrightMagenta}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_CYAN_BRIGHT_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiBrightCyan}"/>
+      </value>
+    </option>
+    <option name="CONSOLE_WHITE_OUTPUT">
+      <value>
+        <option name="FOREGROUND" value="${ansiBrightWhite}"/>
+      </value>
+    </option>
+
+    <!-- Semantic highlighting -->
+    <option name="RAINBOW_COLOR0">
+      <value>
+        <option name="FOREGROUND" value="${link}"/>
+      </value>
+    </option>
+    <option name="RAINBOW_COLOR1">
+      <value>
+        <option name="FOREGROUND" value="${wood}"/>
+      </value>
+    </option>
+    <option name="RAINBOW_COLOR2">
+      <value>
+        <option name="FOREGROUND" value="${green}"/>
+      </value>
+    </option>
+    <option name="RAINBOW_COLOR3">
+      <value>
+        <option name="FOREGROUND" value="${violet}"/>
+      </value>
+    </option>
+    <option name="RAINBOW_COLOR4">
+      <value>
+        <option name="FOREGROUND" value="${cyan}"/>
       </value>
     </option>
   </attributes>
