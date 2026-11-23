@@ -1,5 +1,3 @@
-<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="10.0" cy="10.0" r="5.38" stroke="#CED0D6"/>
-<circle cx="10.0" cy="10.0" r="1.75" stroke="#CED0D6"/>
-<path d="M11.75 10.00L18.50 10.00M11.24 11.24L16.01 16.01M10.00 11.75L10.00 18.50M8.76 11.24L3.99 16.01M8.25 10.00L1.50 10.00M8.76 8.76L3.99 3.99M10.00 8.25L10.00 1.50M11.24 8.76L16.01 3.99" stroke="#CED0D6" stroke-linecap="round"/>
+<svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="8" cy="8" r="4.3" stroke="#CED0D6" stroke-width="1" fill="none"/><circle cx="8" cy="8" r="1.4" stroke="#CED0D6" stroke-width="1" fill="none"/><path d="M9.40 8.00L14.80 8.00M8.99 8.99L12.81 12.81M8.00 9.40L8.00 14.80M7.01 8.99L3.19 12.81M6.60 8.00L1.20 8.00M7.01 7.01L3.19 3.19M8.00 6.60L8.00 1.20M8.99 7.01L12.81 3.19" stroke="#CED0D6" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

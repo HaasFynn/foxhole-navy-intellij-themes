@@ -178,10 +178,6 @@
       "#9DA0A8": "#${fgMuted}",
       "#6F737A": "#${fgDisabled}"
     },
-    "/general/gearPlain.svg": "/icons/helm.svg",
-    "/general/settings.svg": "/icons/helm.svg",
-    "/expui/general/settings.svg": "/icons/helm.svg",
-    "/toolwindows/toolWindowBookmarks.svg": "/icons/anchor.svg",
-    "/expui/toolwindows/bookmarks.svg": "/icons/anchor.svg"
+    ${iconReplacements}
   }
 }

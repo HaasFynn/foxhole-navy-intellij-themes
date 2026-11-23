@@ -131,13 +131,16 @@ fun derivedColours(p: Map<String, String>): Map<String, String> {
     )
 }
 
+// Written by scripts/draw-icons.py: which platform icons the nautical icons replace.
+val iconJson = file("src/main/icons.json").readText().trim().removePrefix("{").removeSuffix("}").trim()
+
 val themeTasks = fileTree("palettes") { include("*.properties") }.files.sorted().map { paletteFile ->
     val palette = Properties().apply { paletteFile.inputStream().use(::load) }
         .map { (key, value) -> key.toString() to value.toString() }
         .toMap()
     val fileName = palette.getValue("fileName")
     val rampJson = rampColours(palette).entries.joinToString(",\n    ") { (name, colour) -> "\"$name\": \"#$colour\"" }
-    val tokens = palette + derivedColours(palette) + ("rampColours" to rampJson)
+    val tokens = palette + derivedColours(palette) + ("rampColours" to rampJson) + ("iconReplacements" to iconJson)
 
     tasks.register<Copy>("generateTheme$fileName") {
         from("src/main/templates")
