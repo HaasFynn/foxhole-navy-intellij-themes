@@ -76,6 +76,13 @@
       "DragAndDrop.areaBackground": "#${accent}4D"
     },
 
+    "Tree": {
+      "collapsedIcon": "/icons/pennantRight.svg",
+      "collapsedSelectedIcon": "/icons/pennantRight.svg",
+      "expandedIcon": "/icons/pennantDown.svg",
+      "expandedSelectedIcon": "/icons/pennantDown.svg"
+    },
+
     "Editor.ToolTip.selectionBackground": "#${hoverBg}",
     "List.Tag": {
       "background": "#${border}",
@@ -148,6 +155,33 @@
   },
 
   "icons": {
-    "ColorPalette": {}
+    "ColorPalette": {
+      "#548AF7": "#${link}",
+      "#3574F0": "#${accent}",
+      "#25324D": "#${iconBlueFill}",
+      "#DB5C5C": "#${red}",
+      "#402929": "#${iconRedFill}",
+      "#57965C": "#${green}",
+      "#5FAD65": "#${green}",
+      "#253627": "#${iconGreenFill}",
+      "#F2C55C": "#${brass}",
+      "#D6AE58": "#${brass}",
+      "#3D3223": "#${iconYellowFill}",
+      "#C77D55": "#${wood}",
+      "#E08855": "#${wood}",
+      "#45322B": "#${iconOrangeFill}",
+      "#B589EC": "#${violet}",
+      "#A571E6": "#${violet}",
+      "#2F2936": "#${iconPurpleFill}",
+      "#43454A": "#${border}",
+      "#868A91": "#${fgMuted}",
+      "#9DA0A8": "#${fgMuted}",
+      "#6F737A": "#${fgDisabled}"
+    },
+    "/general/gearPlain.svg": "/icons/helm.svg",
+    "/general/settings.svg": "/icons/helm.svg",
+    "/expui/general/settings.svg": "/icons/helm.svg",
+    "/toolwindows/toolWindowBookmarks.svg": "/icons/anchor.svg",
+    "/expui/toolwindows/bookmarks.svg": "/icons/anchor.svg"
   }
 }
