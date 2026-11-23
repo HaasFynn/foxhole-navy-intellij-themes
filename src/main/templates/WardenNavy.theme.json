@@ -141,7 +141,7 @@
   },
 
   "background": {
-    "image": "images/${fileName}-sonar.png",
+    "image": "images/${fileName}-chart.png",
     "transparency": 16,
     "fill": "plain",
     "anchor": "bottom_right"
