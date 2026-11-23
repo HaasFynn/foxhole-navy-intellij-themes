@@ -1,0 +1,18 @@
+{
+  "name": "${themeName}",
+  "dark": true,
+  "author": "HaasFynn",
+  "parentTheme": "Islands Dark",
+  "editorScheme": "/themes/${fileName}.xml",
+  "colors": {
+    "editorBg": "#${editorBg}",
+    "toolBg": "#${toolBg}",
+    "windowBg": "#${windowBg}",
+    "fg": "#${fg}",
+    "accent": "#${accent}"
+  },
+  "ui": {
+    "MainWindow.background": "windowBg",
+    "ToolWindow.background": "toolBg"
+  }
+}
