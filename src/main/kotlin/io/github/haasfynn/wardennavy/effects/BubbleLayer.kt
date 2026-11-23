@@ -10,34 +10,37 @@ import java.awt.Graphics
 import java.awt.Graphics2D
 import java.awt.Rectangle
 import java.awt.RenderingHints
-import java.awt.geom.Arc2D
 import java.awt.geom.Ellipse2D
 import javax.swing.JComponent
-import javax.swing.SwingUtilities
 import kotlin.math.ceil
 import kotlin.math.sin
 import kotlin.random.Random
 
 /**
- * A see-through layer over one editor in which a few air bubbles drift upwards, as if seen while diving.
- * It never takes mouse or keyboard input and only repaints the narrow column its bubbles rise in.
+ * A see-through layer over one editor that shows a single breath of air: a few bubbles that rise
+ * a short way and burst. It exists only while that breath lasts, never takes mouse or keyboard
+ * input, and redraws just the few pixels around each bubble.
  */
-internal class BubbleLayer(private val editor: Editor) : JComponent() {
+internal class BubbleLayer(val editor: Editor) : JComponent() {
 
-    private class Bubble(var x: Double, var y: Double, val radius: Double, val speed: Double,
-                         val sway: Double, val swayRate: Double, val burstAt: Double, var age: Double = 0.0) {
-        /** Seconds since the bubble burst, or a negative value while it is still rising. */
+    private class Bubble(val x: Double, var y: Double, val radius: Double, val speed: Double,
+                         val sway: Double, val swayRate: Double, val burstAt: Double, var delay: Double) {
+        var age = 0.0
+        /** Seconds since the bubble burst, or negative while it is still rising. */
         var burst = -1.0
-        var lastBounds: Rectangle? = null
+        val drawn = Rectangle()
+        var visible = false
     }
 
-    private val bubbles = ArrayList<Bubble>()
     private val random = Random.Default
-    private var untilNextStream = 0.5
-    private var streamX = 0.0
-    private var streamLeft = 0
-
+    private val bubbles: List<Bubble>
     private val areaListener = VisibleAreaListener { fitToVisibleArea() }
+    private val base: Color = JBColor.namedColor("Label.foreground", JBColor.foreground())
+    private val outline = Color(base.red, base.green, base.blue, (STRENGTH * 255).toInt())
+    private val body = Color(base.red, base.green, base.blue, (STRENGTH * 0.2 * 255).toInt())
+    private val stroke = BasicStroke(JBUI.scale(1).toFloat())
+    private val shape = Ellipse2D.Double()
+    private val scratch = Rectangle()
 
     init {
         isOpaque = false
@@ -45,6 +48,23 @@ internal class BubbleLayer(private val editor: Editor) : JComponent() {
         editor.contentComponent.add(this)
         editor.scrollingModel.addVisibleAreaListener(areaListener)
         fitToVisibleArea()
+
+        val scale = JBUI.scale(1).toDouble()
+        val startX = random.nextDouble(width * 0.1, width * 0.9)
+        val startY = height * random.nextDouble(0.45, 0.95)
+        bubbles = List(random.nextInt(3, 7)) { index ->
+            val radius = scale * random.nextDouble(1.5, 4.5)
+            Bubble(
+                x = startX + scale * random.nextDouble(-7.0, 7.0),
+                y = startY + scale * random.nextDouble(-6.0, 6.0),
+                radius = radius,
+                speed = scale * (60 + radius * 14) * random.nextDouble(0.85, 1.15),
+                sway = random.nextDouble(0.0, 6.28),
+                swayRate = random.nextDouble(2.0, 3.5),
+                burstAt = startY - scale * random.nextDouble(170.0, 360.0),
+                delay = index * random.nextDouble(0.12, 0.3),
+            )
+        }
     }
 
     fun detach() {
@@ -63,115 +83,84 @@ internal class BubbleLayer(private val editor: Editor) : JComponent() {
         if (bounds != area) bounds = area
     }
 
-    /** Advances the simulation by [seconds] and repaints what moved. */
-    fun step(seconds: Double) {
-        if (!isShowing || width <= 0 || height <= 0) return
-        // No animation while the IDE is in the background.
-        if (SwingUtilities.getWindowAncestor(this)?.isActive != true && bubbles.isEmpty()) return
-        spawn(seconds)
-
-        var dirty: Rectangle? = null
-        val iterator = bubbles.iterator()
-        while (iterator.hasNext()) {
-            val bubble = iterator.next()
-            val before = bubble.lastBounds
+    /** Advances the bubbles by [seconds]. Returns false once the last one has burst. */
+    fun step(seconds: Double): Boolean {
+        if (editor.isDisposed || !isShowing) return false
+        var alive = false
+        for (bubble in bubbles) {
+            if (bubble.burst > BURST_SECONDS) continue
+            alive = true
+            if (bubble.delay > 0) {
+                bubble.delay -= seconds
+                continue
+            }
             bubble.age += seconds
             if (bubble.burst >= 0) {
                 bubble.burst += seconds
             } else {
                 bubble.y -= bubble.speed * seconds
-                if (bubble.y < bubble.burstAt) bubble.burst = 0.0
+                if (bubble.y < bubble.burstAt || bubble.y < bubble.radius * 3) bubble.burst = 0.0
             }
-            val gone = bubble.burst > BURST_SECONDS
-            val after = if (gone) null else boundsOf(bubble)
-            bubble.lastBounds = after
-            if (gone) iterator.remove()
-            for (area in listOfNotNull(before, after)) dirty = dirty?.union(area) ?: area
+            redraw(bubble)
         }
-        // All bubbles belong to one narrow stream, so the area to redraw is a slim column
-        // rather than the whole editor.
-        dirty?.let(::repaint)
+        return alive
     }
 
-    private fun spawn(seconds: Double) {
-        if (streamLeft == 0 && bubbles.isEmpty()) {
-            untilNextStream -= seconds
-            if (untilNextStream <= 0) {
-                // A breath of air: a handful of bubbles from one spot.
-                streamX = random.nextDouble(width * 0.08, width * 0.92)
-                streamLeft = random.nextInt(3, 7)
-                untilNextStream = random.nextDouble(2.5, 6.0)
-            }
-        }
-        if (streamLeft > 0 && random.nextDouble() < seconds * 3) {
-            streamLeft--
-            val radius = JBUI.scale(1) * random.nextDouble(1.5, 4.5)
-            bubbles += Bubble(
-                x = streamX + random.nextDouble(-6.0, 6.0),
-                y = height + radius,
-                radius = radius,
-                speed = JBUI.scale(1) * (26 + radius * 8) * random.nextDouble(0.85, 1.15),
-                sway = random.nextDouble(0.0, 100.0),
-                swayRate = random.nextDouble(1.2, 2.2),
-                // Bubbles burst at different heights in the upper third rather than on one line.
-                burstAt = height * random.nextDouble(0.04, 0.34),
-            )
-        }
-    }
-
-    private fun centreX(bubble: Bubble) = bubble.x + sin(bubble.age * bubble.swayRate + bubble.sway) * bubble.radius * 1.2
-
-    private fun boundsOf(bubble: Bubble): Rectangle {
+    /** Repaints the bubble's old and new position at once, as one small rectangle. */
+    private fun redraw(bubble: Bubble) {
+        val gone = bubble.burst > BURST_SECONDS
         val reach = (if (bubble.burst >= 0) bubble.radius * 2.4 else bubble.radius) + 2
         val size = ceil(reach * 2).toInt() + 2
-        return Rectangle((centreX(bubble) - reach).toInt() - 1, (bubble.y - reach).toInt() - 1, size, size)
+        scratch.setBounds((centreX(bubble) - reach).toInt() - 1, (bubble.y - reach).toInt() - 1, size, size)
+        val area = if (bubble.visible) scratch.union(bubble.drawn) else Rectangle(scratch)
+        bubble.drawn.bounds = scratch
+        bubble.visible = !gone
+        // Painted straight away: Swing would otherwise merge all bubbles into one large rectangle
+        // and redraw every line of code in between.
+        paintImmediately(area)
     }
 
+    private fun centreX(bubble: Bubble) = bubble.x + sin(bubble.age * bubble.swayRate + bubble.sway) * bubble.radius * 0.9
+
     override fun paintComponent(g: Graphics) {
-        if (bubbles.isEmpty()) return
         val g2 = g.create() as Graphics2D
         try {
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
             g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE)
-            val base = JBColor.namedColor("Label.foreground", JBColor.foreground())
-            for (bubble in bubbles) paintBubble(g2, bubble, base)
+            g2.stroke = stroke
+            val clip = g.clipBounds
+            for (bubble in bubbles) {
+                if (!bubble.visible || bubble.delay > 0) continue
+                if (clip != null && !clip.intersects(bubble.drawn)) continue
+                paintBubble(g2, bubble)
+            }
         } finally {
             g2.dispose()
         }
     }
 
-    private fun paintBubble(g2: Graphics2D, bubble: Bubble, base: Color) {
+    private fun paintBubble(g2: Graphics2D, bubble: Bubble) {
         val x = centreX(bubble)
-        val fadeIn = (bubble.age / 0.6).coerceAtMost(1.0)
         if (bubble.burst >= 0) {
             // The burst: a ring that widens and fades.
             val progress = (bubble.burst / BURST_SECONDS).coerceIn(0.0, 1.0)
             val radius = bubble.radius * (1 + 1.3 * progress)
-            g2.color = withAlpha(base, STRENGTH * (1 - progress))
-            g2.stroke = BasicStroke(JBUI.scale(1).toFloat() * 0.8f)
-            g2.draw(Ellipse2D.Double(x - radius, bubble.y - radius, radius * 2, radius * 2))
+            shape.setFrame(x - radius, bubble.y - radius, radius * 2, radius * 2)
+            g2.color = Color(base.red, base.green, base.blue, (STRENGTH * (1 - progress) * 255).toInt())
+            g2.draw(shape)
             return
         }
         val r = bubble.radius
-        val shape = Ellipse2D.Double(x - r, bubble.y - r, r * 2, r * 2)
-        g2.color = withAlpha(base, STRENGTH * 0.18 * fadeIn)
+        shape.setFrame(x - r, bubble.y - r, r * 2, r * 2)
+        g2.color = body
         g2.fill(shape)
-        g2.color = withAlpha(base, STRENGTH * fadeIn)
-        g2.stroke = BasicStroke(JBUI.scale(1).toFloat())
+        g2.color = outline
         g2.draw(shape)
-        if (r > 2.5) {
-            // A small glint on the upper left.
-            g2.color = withAlpha(base, STRENGTH * 1.4 * fadeIn)
-            g2.draw(Arc2D.Double(x - r * 0.55, bubble.y - r * 0.55, r * 1.1, r * 1.1, 110.0, 60.0, Arc2D.OPEN))
-        }
     }
 
-    private fun withAlpha(colour: Color, alpha: Double) =
-        Color(colour.red, colour.green, colour.blue, (alpha.coerceIn(0.0, 1.0) * 255).toInt())
-
     private companion object {
-        const val BURST_SECONDS = 0.35
-        /** Overall opacity of a bubble's outline; the effect is meant to stay in the background. */
-        const val STRENGTH = 0.34
+        const val BURST_SECONDS = 0.3
+        /** Opacity of a bubble's outline; the effect is meant to stay in the background. */
+        const val STRENGTH = 0.36
     }
 }

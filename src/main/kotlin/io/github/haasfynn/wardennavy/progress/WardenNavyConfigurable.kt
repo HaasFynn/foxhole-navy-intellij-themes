@@ -15,7 +15,7 @@ class WardenNavyConfigurable : BoundConfigurable("Warden Navy") {
                 .comment("Only while a Warden Navy theme is active. Progress bars that are already visible keep their look.")
         }
         row {
-            checkBox("Let air bubbles rise through the editor")
+            checkBox("Let a breath of air bubbles rise in the editor now and then")
                 .bindSelected(Bubbles::enabled)
                 .comment("Only while a Warden Navy theme is active. Paused in Power Save Mode.")
         }

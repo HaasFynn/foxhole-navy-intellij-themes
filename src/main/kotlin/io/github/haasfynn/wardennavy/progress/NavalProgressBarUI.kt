@@ -59,26 +59,44 @@ class NavalProgressBarUI : BasicProgressBarUI() {
     override fun paintIndeterminate(g: Graphics, c: JComponent) {
         if (isVertical()) return super.paintIndeterminate(g, c)
         withGraphics(g) { g2, area ->
+            val flat = area.height < JBUI.scale(MIN_SHIP_BAR)
             val phase = (System.currentTimeMillis() % SWEEP_MILLIS) / SWEEP_MILLIS.toDouble()
-            g2.color = trackColor()
-            g2.draw(waterline(area.x.toDouble(), (area.x + area.width).toDouble(), area.waterY, phase * WAVE_LENGTH * 4))
+            val waterY = if (flat) area.y + area.height - JBUI.scale(1).toDouble() else area.waterY
+            val shift = if (flat) 0.0 else phase * WAVE_LENGTH * 4
+            if (flat) g2.stroke = java.awt.BasicStroke(JBUI.scale(1).toFloat() * 1.5f)
+            val left = area.x.toDouble()
+            val right = (area.x + area.width).toDouble()
+            fun water(from: Double, to: Double): java.awt.Shape =
+                if (flat) java.awt.geom.Line2D.Double(from, waterY, to, waterY) else waterline(from, to, waterY, shift)
 
-            // The pulse enters from the left edge, crosses the bar and leaves on the right.
-            val pulseWidth = max(area.width / 3.0, JBUI.scale(24).toDouble())
-            val head = area.x - pulseWidth + (area.width + 2 * pulseWidth) * phase
+            g2.color = trackColor()
+            g2.draw(water(left, right))
+
+            // A ship crosses the bar again and again, trailing a wake that fades out behind it.
+            val shipHeight = if (flat) area.height - JBUI.scale(1).toDouble() else area.height - JBUI.scale(3).toDouble()
+            val ship = Path2D.Double(SHIP, AffineTransform.getScaleInstance(shipHeight / SHIP_HEIGHT, shipHeight / SHIP_HEIGHT))
+            val shipWidth = ship.bounds2D.width
+            val wake = max(area.width / 3.0, JBUI.scale(24).toDouble())
+            val forwards = c.componentOrientation.isLeftToRight
+            val travel = (area.width + shipWidth + wake) * phase
+            val stern = if (forwards) left - shipWidth + travel else right + shipWidth - travel - shipWidth
             val colour = progressColor()
             val clear = Color(colour.red, colour.green, colour.blue, 0)
-            g2.paint = GradientPaint((head - pulseWidth).toFloat(), 0f, clear, head.toFloat(), 0f, colour)
-            val from = max(head - pulseWidth, area.x.toDouble())
-            val to = min(head, (area.x + area.width).toDouble())
-            if (to > from) {
-                g2.draw(waterline(from, to, area.waterY, phase * WAVE_LENGTH * 4))
-                val ping = JBUI.scale(2).toDouble()
-                if (head <= area.x + area.width) {
-                    g2.color = colour
-                    g2.fill(java.awt.geom.Ellipse2D.Double(head - ping, area.waterY - JBUI.scale(5) - ping, ping * 2, ping * 2))
-                }
-            }
+            val wakeFar = if (forwards) stern - wake else stern + shipWidth + wake
+            val wakeNear = if (forwards) stern else stern + shipWidth
+            g2.paint = GradientPaint(wakeFar.toFloat(), 0f, clear, wakeNear.toFloat(), 0f, colour)
+            val from = max(min(wakeFar, wakeNear), left)
+            val to = min(max(wakeFar, wakeNear), right)
+            if (to > from) g2.draw(water(from, to))
+
+            val clip = g2.clip
+            g2.clipRect(area.x, 0, area.width, progressBar.height)
+            val top = if (flat) area.y.toDouble() else waterY - shipHeight + JBUI.scale(1)
+            val transform = AffineTransform.getTranslateInstance(stern, top)
+            if (!forwards) { transform.translate(shipWidth, 0.0); transform.scale(-1.0, 1.0) }
+            g2.color = hullColor()
+            g2.fill(transform.createTransformedShape(ship))
+            g2.clip = clip
         }
     }
 
@@ -132,19 +150,28 @@ class NavalProgressBarUI : BasicProgressBarUI() {
         return textWidth + JBUI.scale(8)
     }
 
-    /** For bars too flat to fit a ship: a plain line that fills up. */
+    /** For bars too flat for the waterline: a plain line that fills up, with a small ship at its tip. */
     private fun paintPlainBar(g2: Graphics2D, area: Area, c: JComponent) {
-        val y = area.y + area.height / 2.0
-        val filled = area.width * progressBar.percentComplete.coerceIn(0.0, 1.0)
+        val thickness = JBUI.scale(1).toDouble()
+        val y = area.y + area.height - thickness
+        val ship = Path2D.Double(SHIP, AffineTransform.getScaleInstance((area.height - thickness) / SHIP_HEIGHT,
+            (area.height - thickness) / SHIP_HEIGHT))
+        val shipWidth = ship.bounds2D.width
         val forwards = c.componentOrientation.isLeftToRight
+        val travelled = (area.width - shipWidth) * progressBar.percentComplete.coerceIn(0.0, 1.0)
+        val shipX = if (forwards) area.x + travelled else area.x + area.width - shipWidth - travelled
         val line = java.awt.geom.Line2D.Double(area.x.toDouble(), y, (area.x + area.width).toDouble(), y)
+        g2.stroke = java.awt.BasicStroke(thickness.toFloat() * 1.5f)
         g2.color = trackColor()
         g2.draw(line)
-        if (filled > 0) {
-            if (forwards) line.x2 = area.x + filled else line.x1 = area.x + area.width - filled
-            g2.color = progressColor()
-            g2.draw(line)
-        }
+        if (forwards) line.x2 = shipX else line.x1 = shipX + shipWidth
+        g2.color = progressColor()
+        g2.draw(line)
+        g2.color = hullColor()
+        g2.fill(AffineTransform.getTranslateInstance(shipX, area.y.toDouble()).let {
+            if (!forwards) { it.translate(shipWidth, 0.0); it.scale(-1.0, 1.0) }
+            it.createTransformedShape(ship)
+        })
     }
 
     private fun isVertical() = progressBar.orientation == SwingConstants.VERTICAL
@@ -198,7 +225,7 @@ class NavalProgressBarUI : BasicProgressBarUI() {
 
     companion object {
         private const val BAR_HEIGHT = 14
-        /** Below this height the ship would be an unreadable smudge. */
+        /** Below this height there is no room for waves; the bar becomes a line with a small ship. */
         private const val MIN_SHIP_BAR = 8
         private const val WAVE_LENGTH = 10
         private const val SWEEP_MILLIS = 1800L

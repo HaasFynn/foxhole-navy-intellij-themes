@@ -151,11 +151,18 @@ val themeTasks = fileTree("palettes") { include("*.properties") }.files.sorted()
     }
 }
 
-val generateThemes by tasks.registering(Sync::class) {
+val generateThemes = tasks.register<Sync>("generateThemes") {
     themeTasks.forEach { from(it) { into("themes") } }
     into(layout.buildDirectory.dir("generated/theme-resources"))
 }
 
 sourceSets.main {
     resources.srcDir(generateThemes)
+}
+
+// Extra JVM options for the sandbox IDE, e.g. IDE_JVM_ARGS="-Dwardennavy.bubbles.demo=true" ./gradlew runIde
+tasks.runIde {
+    jvmArgumentProviders += CommandLineArgumentProvider {
+        (System.getenv("IDE_JVM_ARGS") ?: "").split(" ").filter { it.isNotBlank() }
+    }
 }
