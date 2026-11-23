@@ -141,15 +141,15 @@
   },
 
   "background": {
-    "image": "images/${fileName}-stripes.png",
-    "transparency": 8,
+    "image": "images/${fileName}-blueprint.png",
+    "transparency": 22,
     "fill": "plain",
     "anchor": "bottom_right"
   },
 
   "emptyFrameBackground": {
-    "image": "images/${fileName}-sonar.png",
-    "transparency": 55,
+    "image": "images/${fileName}-blueprint.png",
+    "transparency": 45,
     "fill": "plain",
     "anchor": "bottom_right"
   },

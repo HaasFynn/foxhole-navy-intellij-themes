@@ -13,7 +13,7 @@ Fan-made. Not affiliated with or endorsed by Siege Camp. All artwork in this rep
 
 - **IDE chrome**: every component, recoloured through the colour ramps of the parent theme *Islands Dark*.
 - **Editor colour scheme**: syntax, inspections, diff, VCS, debugger, console and terminal colours.
-- **Background artwork**: a sonar display with a warship or submarine in the empty frame, bow stripes behind the editor.
+- **Background artwork**: a blueprint of a warship or submarine over a sonar display, faint behind the code and stronger in the empty frame.
 - **Icons**: palette-coloured platform icons, a helm for Settings, an anchor for Bookmarks, pennants as tree arrows.
 - **Progress bar**: a ship steaming along a waterline; indeterminate progress is a sonar pulse.
   Switch it off under **Settings | Appearance & Behavior | Warden Navy**.
@@ -36,10 +36,13 @@ Colours live in `palettes/<variant>.properties`. The build expands every palette
 
 ## Artwork
 
-The background images are drawn as SVG in `art/` and rendered to `src/main/resources/images` with:
+The background images are generated as SVG into `art/` and rendered to `src/main/resources/images`:
 
 ```sh
-scripts/render-art.sh   # needs rsvg-convert (librsvg)
+python3 scripts/draw-blueprints.py   # writes art/<Variant>-blueprint.svg
+scripts/render-art.sh                # needs rsvg-convert (librsvg)
 ```
+
+How strongly the artwork shows is set by `transparency` under `background` (behind the editor) and `emptyFrameBackground` in `src/main/templates/WardenNavy.theme.json`.
 
 `scripts/contrast.py` checks every palette against WCAG contrast ratios.
