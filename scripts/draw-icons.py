@@ -55,10 +55,18 @@ def helm():
     return circle(8, 8, 4.3) + circle(8, 8, 1.4) + stroke(spokes)
 
 
-def anchor():
-    return circle(8, 3.2, 1.4) + stroke(
+def anchor(colour=LINE, width=1):
+    return circle(8, 3.2, 1.4, colour=colour, width=width) + stroke(
         "M8 4.6V13.2M5.4 6.6H10.6M3.4 9.4C3.4 11.8 5.5 13.2 8 13.2C10.5 13.2 12.6 11.8 12.6 9.4"
-        "M2.3 10.8L3.4 9.1L4.8 10.5M13.7 10.8L12.6 9.1L11.2 10.5")
+        "M2.3 10.8L3.4 9.1L4.8 10.5M13.7 10.8L12.6 9.1L11.2 10.5", colour=colour, width=width)
+
+
+def buoy():
+    return (stroke("M8 1.6V4.4M6.6 2.6H9.4")
+            + stroke("M6.3 4.4H9.7L11.4 10.8H4.6Z", fill=FILL)
+            + stroke("M5.4 7.6H10.6", colour=RED, width=1.4)
+            + stroke("M1.6 12.6C2.7 11.4 3.7 11.4 4.8 12.6C5.9 13.8 6.9 13.8 8 12.6C9.1 11.4 10.1 11.4 11.2 12.6"
+                     "C12.3 13.8 13.3 13.8 14.4 12.6", colour=BLUE))
 
 
 def sea_chart():
@@ -171,14 +179,9 @@ def container():
 
 # ------------------------------------------------------------------------------------ run bar
 
-def run_pennant():
-    return (stroke("M4 1.8V14.2", colour=GREEN, width=1.2)
-            + stroke("M4 2.6L13.4 6.3L4 10Z", colour=GREEN, fill=GREEN_FILL))
-
-
-def stop_flag():
-    return (stroke("M3.5 1.8V14.2", colour=RED, width=1.2)
-            + stroke("M3.5 2.6H12.8V10H3.5Z", colour=RED, fill=RED_FILL))
+def run_pennant(colour=GREEN, fill=GREEN_FILL, width=1.2):
+    return (stroke("M4 1.8V14.2", colour=colour, width=width)
+            + stroke("M4 2.6L13.4 6.3L4 10Z", colour=colour, fill=fill, width=max(width, 1)))
 
 
 # ------------------------------------------------------------------------------------- status
@@ -255,7 +258,7 @@ def mine_pair():
 # name -> (size, drawing, platform icon paths it replaces, plugin id or None)
 ICONS = {
     "helm": (16, helm(), ["general/gearPlain", "general/settings", "expui/general/settings"], None),
-    "anchor": (16, anchor(), ["toolwindows/toolWindowBookmarks", "expui/toolwindows/bookmarks"], None),
+    "buoy": (16, buoy(), ["toolwindows/toolWindowBookmarks", "expui/toolwindows/bookmarks"], None),
     "seaChart": (16, sea_chart(), ["toolwindows/toolWindowProject", "expui/toolwindows/project"], None),
     "logbook": (16, logbook(), ["toolwindows/toolWindowCommit", "expui/toolwindows/commit"], None),
     "deckPlan": (16, deck_plan(), ["toolwindows/toolWindowStructure", "expui/toolwindows/structure"], None),
@@ -282,7 +285,7 @@ ICONS = {
 
     "runPennant": (16, run_pennant(), ["actions/execute", "expui/run/run"], None),
     "debugHelmet": (16, diving_helmet(GREEN, GREEN_FILL), ["actions/startDebugger", "expui/run/debug"], None),
-    "stopFlag": (16, stop_flag(), ["actions/suspend", "expui/run/stop"], None),
+    "stopAnchor": (16, anchor(RED, 1.4), ["actions/suspend", "expui/run/stop"], None),
 
     "statusError": (16, status_error(), ["general/balloonError", "general/error", "expui/status/error"], None),
     "statusWarning": (16, status_warning(), ["general/balloonWarning", "general/warning",
@@ -315,6 +318,13 @@ ICONS = {
     "mineLogging": (14, mine(YELLOW), ["debugger/db_no_suspend_breakpoint",
                                        "expui/breakpoints/breakpointUnsuspendent"], None),
     "minePair": (14, mine_pair(), ["debugger/MultipleBreakpoints", "expui/breakpoints/multipleBreakpoints"], None),
+}
+
+# On coloured buttons (the green Run and red Stop widgets) the IDE looks for a white `_stroke` variant.
+STROKE = {
+    "runPennant": run_pennant("white", "none", 1.5),
+    "debugHelmet": diving_helmet("white"),
+    "stopAnchor": anchor("white", 1.5),
 }
 
 # Tree arrows are referenced directly by the theme (Tree.collapsedIcon and friends).
@@ -359,6 +369,9 @@ def main():
         for suffix, pixels in sizes:
             for dark in ("", "_dark"):
                 (ICON_DIR / f"{name}{suffix}{dark}.svg").write_text(svg(pixels, size, body))
+
+    for name, body in STROKE.items():
+        (ICON_DIR / f"{name}_stroke.svg").write_text(svg(16, 16, body))
 
     for name, (_, _, targets, plugin) in ICONS.items():
         scope = replacements.setdefault(plugin, {}) if plugin else replacements
