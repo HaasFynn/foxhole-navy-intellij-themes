@@ -19,6 +19,7 @@
   <extensions defaultExtensionNs="com.intellij">
     <themeProvider id="io.github.haasfynn.wardennavy.blacksteele" path="/themes/Blacksteele.theme.json" targetUi="islands"/>
     <themeProvider id="io.github.haasfynn.wardennavy.nakki" path="/themes/Nakki.theme.json" targetUi="islands"/>
+    <editorFactoryListener implementation="io.github.haasfynn.wardennavy.effects.BubbleEditorListener"/>
     <applicationConfigurable parentId="appearance" id="io.github.haasfynn.wardennavy.settings"
                              instance="io.github.haasfynn.wardennavy.progress.WardenNavyConfigurable"
                              displayName="Warden Navy"/>
