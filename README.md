@@ -15,10 +15,13 @@ Fan-made. Not affiliated with or endorsed by Siege Camp. All artwork in this rep
 - **Editor colour scheme**: syntax, inspections, diff, VCS, debugger, console and terminal colours.
 - **Background artwork**: a sonar display with a warship or submarine, faint behind the code and stronger in the empty frame.
 - **Icons**: 45 nautical icons. Breakpoints are sea mines, folders are crates, tool windows get a sea chart, logbook, ship's bell, periscope and more. Platform icons take the palette colours.
-- **Progress bar**: a ship steaming along a waterline; for indeterminate progress it crosses the bar again and again.
-- **Air bubbles**: every half minute or so a breath of small bubbles rises in the focused editor and bursts. Between breaths nothing is animated.
+- **Progress bar**: a ship (Blacksteele) or a submarine running awash (Nakki) makes its way along the water. For indeterminate progress it crosses the bar again and again.
+- **Air bubbles**: a few bubbles rise from the caret when you pause typing.
+- **Torpedo**: deleting a line (*Delete Line*) sends a torpedo along it.
+- **Sonar ping**: when a build or a run finishes, rings spread across the sonar display, green on success and red on failure.
+- **Depth gauge**: a status bar widget that shows how deep the caret is in the file, one metre per line. Hide it from the status bar's context menu.
 
-Progress bar and bubbles can be switched off under **Settings | Appearance & Behavior | Warden Navy**.
+The effects play for a second or two and leave nothing running in between. Each can be switched off under **Settings | Appearance & Behavior | Warden Navy**; all are off in Power Save Mode.
 
 ## Build
 
@@ -30,8 +33,8 @@ Requires JDK 25.
 ./gradlew verifyPlugin  # JetBrains Plugin Verifier
 ```
 
-To preview the bubbles without waiting, start the sandbox with
-`IDE_JVM_ARGS="-Dwardennavy.bubbles.demo=true" ./gradlew runIde`.
+To watch the effects without typing or building, start the sandbox with
+`IDE_JVM_ARGS="-Dwardennavy.demo=bubbles,torpedo,ping" ./gradlew runIde`; it replays them every few seconds.
 
 Install the ZIP via **Settings | Plugins | ⚙ | Install Plugin from Disk…**, then pick a theme under **Settings | Appearance & Behavior | Appearance**.
 

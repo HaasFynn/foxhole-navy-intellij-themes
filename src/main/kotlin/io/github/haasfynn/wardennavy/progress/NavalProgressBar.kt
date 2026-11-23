@@ -1,23 +1,16 @@
 package io.github.haasfynn.wardennavy.progress
 
-import com.intellij.ide.util.PropertiesComponent
-import com.intellij.ide.ui.LafManager
+import io.github.haasfynn.wardennavy.WardenNavy
+import io.github.haasfynn.wardennavy.settings.WardenNavySettings
 import javax.swing.UIManager
 
 /** Switches the naval progress bar on while a Warden Navy theme is active, and off otherwise. */
 object NavalProgressBar {
     private const val UI_KEY = "ProgressBarUI"
-    private const val ENABLED_KEY = "io.github.haasfynn.wardennavy.navalProgressBar"
-    private const val THEME_ID_PREFIX = "io.github.haasfynn.wardennavy."
     private const val PLATFORM_UI = "com.intellij.ide.ui.laf.darcula.ui.DarculaProgressBarUI"
 
-    var enabled: Boolean
-        get() = PropertiesComponent.getInstance().getBoolean(ENABLED_KEY, true)
-        set(value) = PropertiesComponent.getInstance().setValue(ENABLED_KEY, value, true)
-
     fun sync() {
-        val themeId = LafManager.getInstance().currentUIThemeLookAndFeel?.id.orEmpty()
-        if (enabled && themeId.startsWith(THEME_ID_PREFIX)) install() else uninstall()
+        if (WardenNavySettings.navalProgressBar && WardenNavy.variant() != null) install() else uninstall()
     }
 
     fun uninstall() {

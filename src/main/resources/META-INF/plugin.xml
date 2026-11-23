@@ -20,16 +20,30 @@
     <themeProvider id="io.github.haasfynn.wardennavy.blacksteele" path="/themes/Blacksteele.theme.json" targetUi="islands"/>
     <themeProvider id="io.github.haasfynn.wardennavy.nakki" path="/themes/Nakki.theme.json" targetUi="islands"/>
     <applicationConfigurable parentId="appearance" id="io.github.haasfynn.wardennavy.settings"
-                             instance="io.github.haasfynn.wardennavy.progress.WardenNavyConfigurable"
+                             instance="io.github.haasfynn.wardennavy.settings.WardenNavyConfigurable"
                              displayName="Warden Navy"/>
+    <statusBarWidgetFactory id="WardenNavyDepthGauge"
+                            implementation="io.github.haasfynn.wardennavy.instruments.DepthGaugeWidgetFactory"
+                            order="after positionWidget"/>
   </extensions>
 
   <applicationListeners>
-    <listener class="io.github.haasfynn.wardennavy.progress.NavalProgressBarListener"
+    <listener class="io.github.haasfynn.wardennavy.WardenNavyListener"
               topic="com.intellij.ide.ui.LafManagerListener"/>
-    <listener class="io.github.haasfynn.wardennavy.progress.NavalProgressBarListener"
+    <listener class="io.github.haasfynn.wardennavy.WardenNavyListener"
               topic="com.intellij.ide.AppLifecycleListener"/>
-    <listener class="io.github.haasfynn.wardennavy.progress.NavalProgressBarPluginListener"
+    <listener class="io.github.haasfynn.wardennavy.WardenNavyListener"
+              topic="com.intellij.ide.PowerSaveMode$Listener"/>
+    <listener class="io.github.haasfynn.wardennavy.WardenNavyPluginListener"
               topic="com.intellij.ide.plugins.DynamicPluginListener"/>
+    <listener class="io.github.haasfynn.wardennavy.effects.EditorEffects"
+              topic="com.intellij.openapi.actionSystem.ex.AnActionListener"/>
   </applicationListeners>
+
+  <projectListeners>
+    <listener class="io.github.haasfynn.wardennavy.effects.BuildFinishListener"
+              topic="com.intellij.task.ProjectTaskListener"/>
+    <listener class="io.github.haasfynn.wardennavy.effects.RunFinishListener"
+              topic="com.intellij.execution.ExecutionListener"/>
+  </projectListeners>
 </idea-plugin>
