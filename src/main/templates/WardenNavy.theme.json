@@ -133,6 +133,20 @@
     }
   },
 
+  "background": {
+    "image": "images/${fileName}-stripes.png",
+    "transparency": 8,
+    "fill": "plain",
+    "anchor": "bottom_right"
+  },
+
+  "emptyFrameBackground": {
+    "image": "images/${fileName}-sonar.png",
+    "transparency": 55,
+    "fill": "plain",
+    "anchor": "bottom_right"
+  },
+
   "icons": {
     "ColorPalette": {}
   }

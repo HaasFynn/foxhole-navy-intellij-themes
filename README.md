@@ -24,3 +24,13 @@ Install the ZIP via **Settings | Plugins | ⚙ | Install Plugin from Disk…**, 
 ## How the themes are generated
 
 Colours live in `palettes/<variant>.properties`. The build expands every palette through the templates in `src/main/templates` into one UI theme (`*.theme.json`) and one editor colour scheme (`*.xml`). To add a variant, add a palette file and a `themeProvider` entry in `src/main/resources/META-INF/plugin.xml`.
+
+## Artwork
+
+The background images are drawn as SVG in `art/` and rendered to `src/main/resources/images` with:
+
+```sh
+scripts/render-art.sh   # needs rsvg-convert (librsvg)
+```
+
+`scripts/contrast.py` checks every palette against WCAG contrast ratios.
