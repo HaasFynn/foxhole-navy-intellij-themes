@@ -28,9 +28,16 @@ class NavalProgressBarUI : BasicProgressBarUI() {
         return if (isVertical()) size else Dimension(size.width, JBUI.scale(BAR_HEIGHT))
     }
 
+    /**
+     * Swing repaints only the moving "box" of an indeterminate bar on each frame. The whole bar is
+     * animated here, so the box has to span it; otherwise the pulse updates in fragments.
+     */
+    override fun getBoxLength(availableLength: Int, otherDimension: Int): Int = availableLength
+
     override fun paintDeterminate(g: Graphics, c: JComponent) {
         if (isVertical()) return super.paintDeterminate(g, c)
         withGraphics(g) { g2, area ->
+            if (area.height < JBUI.scale(MIN_SHIP_BAR)) return@withGraphics paintPlainBar(g2, area, c)
             val ship = scaledShip(area.height)
             val shipWidth = ship.bounds2D.width
             val fraction = progressBar.percentComplete.coerceIn(0.0, 1.0)
@@ -46,11 +53,6 @@ class NavalProgressBarUI : BasicProgressBarUI() {
             g2.draw(waterline(wakeStart, wakeEnd, area.waterY, 0.0))
 
             paintShip(g2, ship, shipX, area.waterY, forwards)
-        }
-        if (progressBar.isStringPainted) {
-            val insets = progressBar.insets
-            paintString(g, insets.left, insets.top, c.width - insets.left - insets.right,
-                c.height - insets.top - insets.bottom, getAmountFull(insets, c.width, c.height), insets)
         }
     }
 
@@ -80,23 +82,68 @@ class NavalProgressBarUI : BasicProgressBarUI() {
         }
     }
 
+    /** The band the bar is drawn in: as wide as the component, at most [BAR_HEIGHT] tall and centred. */
     private class Area(val x: Int, val y: Int, val width: Int, val height: Int) {
         val waterY: Double get() = y + height - JBUI.scale(3).toDouble()
     }
 
     private inline fun withGraphics(g: Graphics, paint: (Graphics2D, Area) -> Unit) {
-        val insets = progressBar.insets
-        val area = Area(insets.left, insets.top,
-            progressBar.width - insets.left - insets.right, progressBar.height - insets.top - insets.bottom)
-        if (area.width <= 0 || area.height <= 0) return
+        val bar = progressBar
+        // Like the platform bar: take on the colour of the surroundings instead of a box of our own.
+        val parent = bar.parent
+        if (bar.isOpaque && parent != null && parent.isOpaque) {
+            g.color = parent.background
+            g.fillRect(0, 0, bar.width, bar.height)
+        }
+        val insets = bar.insets
+        val available = bar.height - insets.top - insets.bottom
         val g2 = g.create() as Graphics2D
         try {
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
+            // A percentage or message goes beside the bar, where the ship cannot run over it.
+            val textWidth = paintLabel(g2)
+            val width = bar.width - insets.left - insets.right - textWidth
+            if (width <= 0 || available <= 0) return
+            val height = min(available, JBUI.scale(BAR_HEIGHT))
+            val forwards = bar.componentOrientation.isLeftToRight
+            val area = Area(insets.left + if (forwards) 0 else textWidth, insets.top + (available - height) / 2, width, height)
             g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE)
             g2.stroke = java.awt.BasicStroke(JBUI.scale(2).toFloat(), java.awt.BasicStroke.CAP_ROUND, java.awt.BasicStroke.JOIN_ROUND)
             paint(g2, area)
         } finally {
             g2.dispose()
+        }
+    }
+
+    /** Draws the bar's text at its trailing edge and returns the width to keep free for it. */
+    private fun paintLabel(g2: Graphics2D): Int {
+        val bar = progressBar
+        val text = if (bar.isStringPainted) bar.string.orEmpty() else ""
+        if (text.isEmpty()) return 0
+        val insets = bar.insets
+        val metrics = g2.getFontMetrics(bar.font)
+        val textWidth = metrics.stringWidth(text)
+        val x = if (bar.componentOrientation.isLeftToRight) bar.width - insets.right - textWidth else insets.left
+        val y = insets.top + (bar.height - insets.top - insets.bottom - metrics.height) / 2 + metrics.ascent
+        g2.font = bar.font
+        g2.color = JBColor.namedColor("Label.infoForeground", hullColor())
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
+        g2.drawString(text, x, y)
+        return textWidth + JBUI.scale(8)
+    }
+
+    /** For bars too flat to fit a ship: a plain line that fills up. */
+    private fun paintPlainBar(g2: Graphics2D, area: Area, c: JComponent) {
+        val y = area.y + area.height / 2.0
+        val filled = area.width * progressBar.percentComplete.coerceIn(0.0, 1.0)
+        val forwards = c.componentOrientation.isLeftToRight
+        val line = java.awt.geom.Line2D.Double(area.x.toDouble(), y, (area.x + area.width).toDouble(), y)
+        g2.color = trackColor()
+        g2.draw(line)
+        if (filled > 0) {
+            if (forwards) line.x2 = area.x + filled else line.x1 = area.x + area.width - filled
+            g2.color = progressColor()
+            g2.draw(line)
         }
     }
 
@@ -151,6 +198,8 @@ class NavalProgressBarUI : BasicProgressBarUI() {
 
     companion object {
         private const val BAR_HEIGHT = 14
+        /** Below this height the ship would be an unreadable smudge. */
+        private const val MIN_SHIP_BAR = 8
         private const val WAVE_LENGTH = 10
         private const val SWEEP_MILLIS = 1800L
         private const val SHIP_HEIGHT = 10.0
