@@ -64,8 +64,8 @@ class EditorEffects : AnActionListener {
             val caret = editor.visualPositionToXY(editor.caretModel.visualPosition)
             val y = caret.y - area.y
             if (y < 0 || y > area.height) return
-            val target = (caret.x - area.x).coerceIn(area.width / 4, area.width * 3 / 4)
-            Effects.play(TorpedoStrike(editor, y, editor.lineHeight, target.toDouble()))
+            // It comes in from the right edge of the editor and runs the whole line to the left.
+            Effects.play(TorpedoStrike(editor, y, editor.lineHeight, area.width.toDouble()))
         }
     }
 }

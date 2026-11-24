@@ -17,7 +17,7 @@ Fan-made. Not affiliated with or endorsed by Siege Camp. All artwork in this rep
 - **Icons**: 48 nautical icons. Breakpoints are sea mines, folders are crates, tool windows get a sea chart, logbook, ship's bell, periscope and more. Platform icons take the palette colours.
 - **Progress bar**: a ship (Blacksteele) or a submarine running awash (Nakki) makes its way along the water. For indeterminate progress it crosses the bar again and again.
 - **Air bubbles**: a few bubbles rise from the caret when you pause typing.
-- **Torpedo**: deleting a line (*Delete Line*) sends a torpedo along it.
+- **Torpedo**: deleting a line (*Delete Line*) sends a torpedo along it to the left, where it goes off against the edge of the editor.
 - **Sonar ping**: when a build or a run finishes, rings spread across the sonar display, green on success and red on failure.
 - **Telegram notifications**: balloons look like radio telegram slips, paper-toned with a brass edge.
 - **Depth gauge**: a status bar widget that shows how deep the caret is in the file, one metre per line. Hide it from the status bar's context menu.
