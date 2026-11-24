@@ -214,6 +214,27 @@ def status_info():
             + stroke("M6.6 10.6H9.4", colour="#FFFFFF", width=1.1))
 
 
+# ------------------------------------------------------------------- notifications (telegram stamps)
+
+def stamp(colour, mark):
+    """A round rubber stamp, as on a radio telegram form, with a mark for the kind of message."""
+    return (circle(8, 8, 6.6, colour=colour, width=1.2)
+            + circle(8, 8, 4.4, colour=colour, width=0.7)
+            + mark)
+
+
+def stamp_info():
+    return stamp(BLUE, stroke("M8 7.4V10.2", colour=BLUE, width=1.4) + dot(8, 5.6, 0.85, BLUE))
+
+
+def stamp_warning():
+    return stamp(YELLOW, stroke("M8 5.6V8.4", colour=YELLOW, width=1.4) + dot(8, 10.3, 0.85, YELLOW))
+
+
+def stamp_error():
+    return stamp(RED, stroke("M6.3 6.3L9.7 9.7M9.7 6.3L6.3 9.7", colour=RED, width=1.3))
+
+
 # ------------------------------------------------------------------------- breakpoints (14 px)
 
 def mine(colour=RED, solid=True, body="round", horns=8):
@@ -293,6 +314,10 @@ ICONS = {
     "statusSuccess": (16, status_success(), ["status/success", "expui/status/success"], None),
     "statusInfo": (16, status_info(), ["general/balloonInformation", "general/information",
                                        "expui/status/info"], None),
+
+    "stampInfo": (16, stamp_info(), ["general/notificationInfo", "expui/status/notificationInfo"], None),
+    "stampWarning": (16, stamp_warning(), ["general/notificationWarning", "expui/status/notificationWarning"], None),
+    "stampError": (16, stamp_error(), ["general/notificationError", "expui/status/notificationError"], None),
 
     "mine": (14, mine(), ["debugger/db_set_breakpoint", "expui/breakpoints/breakpoint"], None),
     "mineDisabled": (14, mine(solid=False), ["debugger/db_disabled_breakpoint",

@@ -76,6 +76,35 @@
       "DragAndDrop.areaBackground": "#${accent}4D"
     },
 
+    "Notification": {
+      "background": "#${telegramBg}",
+      "borderColor": "#${telegramBorder}",
+      "foreground": "#${fg}",
+      "linkForeground": "#${link}",
+      "arc": 4,
+      "errorBackground": "#${telegramErrorBg}",
+      "errorBorderColor": "#${red}",
+      "errorForeground": "#${fg}",
+      "Button": {
+        "background": "#${telegramBg}",
+        "borderColor": "#${telegramBorder}",
+        "foreground": "#${fg}"
+      },
+      "MoreButton": {
+        "background": "#${telegramBg}",
+        "innerBorderColor": "#${telegramBorder}",
+        "foreground": "#${fgMuted}"
+      },
+      "ToolWindow": {
+        "informativeBackground": "#${telegramBg}",
+        "informativeBorderColor": "#${telegramBorder}",
+        "warningBackground": "#${telegramWarningBg}",
+        "warningBorderColor": "#${amber}",
+        "errorBackground": "#${telegramErrorBg}",
+        "errorBorderColor": "#${red}"
+      }
+    },
+
     "Tree": {
       "collapsedIcon": "/icons/pennantRight.svg",
       "collapsedSelectedIcon": "/icons/pennantRight.svg",

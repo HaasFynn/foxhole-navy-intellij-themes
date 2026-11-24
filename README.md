@@ -14,11 +14,12 @@ Fan-made. Not affiliated with or endorsed by Siege Camp. All artwork in this rep
 - **IDE chrome**: every component, recoloured through the colour ramps of the parent theme *Islands Dark*.
 - **Editor colour scheme**: syntax, inspections, diff, VCS, debugger, console and terminal colours.
 - **Background artwork**: a sea chart with depth contours and soundings runs faintly behind the code and the tool windows, with a sonar display and a warship or submarine in the corner. The empty frame shows the sonar on its own, stronger.
-- **Icons**: 45 nautical icons. Breakpoints are sea mines, folders are crates, tool windows get a sea chart, logbook, ship's bell, periscope and more. Platform icons take the palette colours.
+- **Icons**: 48 nautical icons. Breakpoints are sea mines, folders are crates, tool windows get a sea chart, logbook, ship's bell, periscope and more. Platform icons take the palette colours.
 - **Progress bar**: a ship (Blacksteele) or a submarine running awash (Nakki) makes its way along the water. For indeterminate progress it crosses the bar again and again.
 - **Air bubbles**: a few bubbles rise from the caret when you pause typing.
 - **Torpedo**: deleting a line (*Delete Line*) sends a torpedo along it.
 - **Sonar ping**: when a build or a run finishes, rings spread across the sonar display, green on success and red on failure.
+- **Telegram notifications**: balloons look like radio telegram slips, paper-toned with a brass edge.
 - **Depth gauge**: a status bar widget that shows how deep the caret is in the file, one metre per line. Hide it from the status bar's context menu.
 
 The effects play for a second or two and leave nothing running in between. Each can be switched off under **Settings | Appearance & Behavior | Warden Navy**; all are off in Power Save Mode.
