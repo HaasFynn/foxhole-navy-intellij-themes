@@ -124,6 +124,7 @@ FRIGATE = '''    <path d="M386,394 Q398,381 426,380 H640 L652,371 H786 L824,356 
     <rect x="668" y="336" width="56" height="24" rx="10" stroke="none"/>
     <path d="M689,336 A7,7 0 0 1 703,336 Z" stroke="none"/>
     <rect x="734" y="346" width="26" height="14" rx="5" stroke="none"/>
+    <path d="M736,372 V357 H758 V372 Z" stroke="none"/>
     <rect x="752" y="358" width="28" height="14" rx="5" stroke="none"/>
     <path d="M758,351 L801,346 M779,364 L818,359" stroke-width="3" fill="none"/>
     <path d="M506,380 V248 M662,356 V260" stroke-width="3" fill="none"/>

@@ -46,8 +46,8 @@ internal class Vessel(val shape: Path2D, val waterline: Double) {
             // bridge
             moveTo(16.7, 6.0); lineTo(16.7, 4.5); quadTo(16.7, 3.9, 17.3, 3.9); lineTo(19.4, 3.9)
             quadTo(20.0, 3.9, 20.0, 4.5); lineTo(20.4, 5.2); lineTo(20.4, 6.0); closePath()
-            // two small fore turrets
-            moveTo(20.6, 5.5); lineTo(20.6, 4.6); lineTo(22.1, 4.6); lineTo(22.1, 5.5); closePath()
+            // two small fore turrets, the after one raised on its barbette
+            moveTo(20.6, 6.0); lineTo(20.6, 4.6); lineTo(22.1, 4.6); lineTo(22.1, 6.0); closePath()
             moveTo(21.7, 6.0); lineTo(21.7, 5.3); lineTo(23.2, 5.3); lineTo(23.2, 6.0); closePath()
         }, waterline = 10.0)
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+- Fixed the Blacksteele drawing: the raised fore turret now stands on its barbette instead of hanging in the air, in the sonar display and in the progress bar.
+
 ## 2.0.0
 
 The plugin is now called **Warden & Colonial Navy** and covers both factions.

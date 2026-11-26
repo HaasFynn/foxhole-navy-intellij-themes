@@ -29,6 +29,7 @@
   ]]></description>
 
   <change-notes><![CDATA[
+    <p><b>2.0.1</b>: fixes the Blacksteele drawing, whose raised fore turret was hanging in the air.</p>
     <p><b>2.0.0</b>: adds the Colonial Navy themes Conqueror and Trident and redraws all four vessels.
     The plugin has a new name and id; uninstall Warden Navy 1.0.0 before installing this version.</p>
     <p><b>1.0.0</b>: first public release.</p>
