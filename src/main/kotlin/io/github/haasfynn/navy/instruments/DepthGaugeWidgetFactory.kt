@@ -1,4 +1,4 @@
-package io.github.haasfynn.wardennavy.instruments
+package io.github.haasfynn.navy.instruments
 
 import com.intellij.openapi.editor.EditorFactory
 import com.intellij.openapi.editor.event.CaretEvent
@@ -12,7 +12,7 @@ import com.intellij.openapi.wm.StatusBarWidget
 import com.intellij.openapi.wm.StatusBarWidgetFactory
 import com.intellij.openapi.wm.impl.status.EditorBasedWidget
 import com.intellij.openapi.wm.impl.status.widget.StatusBarWidgetsManager
-import io.github.haasfynn.wardennavy.WardenNavy
+import io.github.haasfynn.navy.Navy
 import java.awt.Component
 
 /** Adds the depth gauge to the status bar while a Warden Navy theme is active. */
@@ -21,12 +21,12 @@ class DepthGaugeWidgetFactory : StatusBarWidgetFactory {
 
     override fun getDisplayName() = "Depth Gauge"
 
-    override fun isAvailable(project: Project) = WardenNavy.variant() != null
+    override fun isAvailable(project: Project) = Navy.variant() != null
 
     override fun createWidget(project: Project): StatusBarWidget = DepthGauge(project)
 
     companion object {
-        const val ID = "WardenNavyDepthGauge"
+        const val ID = "NavyDepthGauge"
 
         /** Shows or hides the gauge in every open project after a theme change. */
         fun refresh() {

@@ -1,1 +1,1 @@
-rootProject.name = "warden-navy-theme"
+rootProject.name = "warden-colonial-navy"

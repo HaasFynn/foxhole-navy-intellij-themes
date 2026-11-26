@@ -1,4 +1,4 @@
-package io.github.haasfynn.wardennavy
+package io.github.haasfynn.navy
 
 import com.intellij.ide.PowerSaveMode
 import com.intellij.ide.ui.LafManager
@@ -6,8 +6,8 @@ import com.intellij.ide.ui.LafManager
 /** Which of the plugin's themes is active, if any. */
 enum class Variant { BLACKSTEELE, NAKKI }
 
-object WardenNavy {
-    const val PLUGIN_ID = "io.github.haasfynn.wardennavy"
+object Navy {
+    const val PLUGIN_ID = "io.github.haasfynn.navy"
     private const val THEME_ID_PREFIX = "$PLUGIN_ID."
 
     fun variant(): Variant? {

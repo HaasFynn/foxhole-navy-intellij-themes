@@ -1,4 +1,4 @@
-package io.github.haasfynn.wardennavy.effects
+package io.github.haasfynn.navy.effects
 
 import com.intellij.execution.ExecutionListener
 import com.intellij.execution.process.ProcessHandler
@@ -7,12 +7,12 @@ import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.Project
 import com.intellij.task.ProjectTaskListener
 import com.intellij.task.ProjectTaskManager
-import io.github.haasfynn.wardennavy.WardenNavy
-import io.github.haasfynn.wardennavy.settings.WardenNavySettings
+import io.github.haasfynn.navy.Navy
+import io.github.haasfynn.navy.settings.NavySettings
 
 private fun ping(project: Project, success: Boolean) {
     ApplicationManager.getApplication().invokeLater {
-        if (!project.isDisposed && WardenNavySettings.sonarPing && WardenNavy.effectsAllowed()) {
+        if (!project.isDisposed && NavySettings.sonarPing && Navy.effectsAllowed()) {
             SonarPing.play(project, success)
         }
     }

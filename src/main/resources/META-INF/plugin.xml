@@ -1,6 +1,6 @@
 <idea-plugin>
-  <id>io.github.haasfynn.wardennavy</id>
-  <name>Warden Navy</name>
+  <id>io.github.haasfynn.navy</id>
+  <name>Warden &amp; Colonial Navy</name>
   <category>UI</category>
   <vendor url="https://github.com/HaasFynn/foxhole-warden-intellij-theme">HaasFynn</vendor>
 
@@ -33,33 +33,33 @@
   <depends>com.intellij.modules.platform</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <themeProvider id="io.github.haasfynn.wardennavy.blacksteele" path="/themes/Blacksteele.theme.json" targetUi="islands"/>
-    <themeProvider id="io.github.haasfynn.wardennavy.nakki" path="/themes/Nakki.theme.json" targetUi="islands"/>
-    <applicationConfigurable parentId="appearance" id="io.github.haasfynn.wardennavy.settings"
-                             instance="io.github.haasfynn.wardennavy.settings.WardenNavyConfigurable"
-                             displayName="Warden Navy"/>
-    <statusBarWidgetFactory id="WardenNavyDepthGauge"
-                            implementation="io.github.haasfynn.wardennavy.instruments.DepthGaugeWidgetFactory"
+    <themeProvider id="io.github.haasfynn.navy.blacksteele" path="/themes/Blacksteele.theme.json" targetUi="islands"/>
+    <themeProvider id="io.github.haasfynn.navy.nakki" path="/themes/Nakki.theme.json" targetUi="islands"/>
+    <applicationConfigurable parentId="appearance" id="io.github.haasfynn.navy.settings"
+                             instance="io.github.haasfynn.navy.settings.NavyConfigurable"
+                             displayName="Warden &amp; Colonial Navy"/>
+    <statusBarWidgetFactory id="NavyDepthGauge"
+                            implementation="io.github.haasfynn.navy.instruments.DepthGaugeWidgetFactory"
                             order="after positionWidget"/>
   </extensions>
 
   <applicationListeners>
-    <listener class="io.github.haasfynn.wardennavy.WardenNavyListener"
+    <listener class="io.github.haasfynn.navy.NavyListener"
               topic="com.intellij.ide.ui.LafManagerListener"/>
-    <listener class="io.github.haasfynn.wardennavy.WardenNavyListener"
+    <listener class="io.github.haasfynn.navy.NavyListener"
               topic="com.intellij.ide.AppLifecycleListener"/>
-    <listener class="io.github.haasfynn.wardennavy.WardenNavyListener"
+    <listener class="io.github.haasfynn.navy.NavyListener"
               topic="com.intellij.ide.PowerSaveMode$Listener"/>
-    <listener class="io.github.haasfynn.wardennavy.WardenNavyPluginListener"
+    <listener class="io.github.haasfynn.navy.NavyPluginListener"
               topic="com.intellij.ide.plugins.DynamicPluginListener"/>
-    <listener class="io.github.haasfynn.wardennavy.effects.EditorEffects"
+    <listener class="io.github.haasfynn.navy.effects.EditorEffects"
               topic="com.intellij.openapi.actionSystem.ex.AnActionListener"/>
   </applicationListeners>
 
   <projectListeners>
-    <listener class="io.github.haasfynn.wardennavy.effects.BuildFinishListener"
+    <listener class="io.github.haasfynn.navy.effects.BuildFinishListener"
               topic="com.intellij.task.ProjectTaskListener"/>
-    <listener class="io.github.haasfynn.wardennavy.effects.RunFinishListener"
+    <listener class="io.github.haasfynn.navy.effects.RunFinishListener"
               topic="com.intellij.execution.ExecutionListener"/>
   </projectListeners>
 </idea-plugin>

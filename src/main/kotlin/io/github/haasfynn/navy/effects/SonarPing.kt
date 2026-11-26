@@ -1,4 +1,4 @@
-package io.github.haasfynn.wardennavy.effects
+package io.github.haasfynn.navy.effects
 
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.WindowManager

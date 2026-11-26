@@ -149,7 +149,7 @@ val themeTasks = fileTree("palettes") { include("*.properties") }.files.sorted()
     tasks.register<Copy>("generateTheme$fileName") {
         from("src/main/templates")
         into(generatedThemes.map { it.dir("themes/$fileName") })
-        rename { it.replace("WardenNavy", fileName) }
+        rename { it.replace("Navy", fileName) }
         expand(tokens)
         inputs.properties(tokens)
     }
@@ -164,7 +164,7 @@ sourceSets.main {
     resources.srcDir(generateThemes)
 }
 
-// Extra JVM options for the sandbox IDE, e.g. IDE_JVM_ARGS="-Dwardennavy.bubbles.demo=true" ./gradlew runIde
+// Extra JVM options for the sandbox IDE, e.g. IDE_JVM_ARGS="-Dnavy.demo=bubbles" ./gradlew runIde
 tasks.runIde {
     jvmArgumentProviders += CommandLineArgumentProvider {
         (System.getenv("IDE_JVM_ARGS") ?: "").split(" ").filter { it.isNotBlank() }

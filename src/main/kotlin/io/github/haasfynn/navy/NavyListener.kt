@@ -1,24 +1,24 @@
-package io.github.haasfynn.wardennavy
+package io.github.haasfynn.navy
 
 import com.intellij.ide.AppLifecycleListener
 import com.intellij.ide.PowerSaveMode
 import com.intellij.ide.ui.LafManager
 import com.intellij.ide.ui.LafManagerListener
-import io.github.haasfynn.wardennavy.effects.Demo
-import io.github.haasfynn.wardennavy.effects.Effects
-import io.github.haasfynn.wardennavy.instruments.DepthGaugeWidgetFactory
-import io.github.haasfynn.wardennavy.progress.NavalProgressBar
+import io.github.haasfynn.navy.effects.Demo
+import io.github.haasfynn.navy.effects.Effects
+import io.github.haasfynn.navy.instruments.DepthGaugeWidgetFactory
+import io.github.haasfynn.navy.progress.NavalProgressBar
 
 /** Keeps everything in step with theme changes, IDE start and Power Save Mode. */
-class WardenNavyListener : LafManagerListener, AppLifecycleListener, PowerSaveMode.Listener {
+class NavyListener : LafManagerListener, AppLifecycleListener, PowerSaveMode.Listener {
     override fun lookAndFeelChanged(source: LafManager) {
         NavalProgressBar.sync()
         DepthGaugeWidgetFactory.refresh()
-        if (!WardenNavy.effectsAllowed()) Effects.stopAll()
+        if (!Navy.effectsAllowed()) Effects.stopAll()
     }
 
     override fun appFrameCreated(commandLineArgs: List<String>) {
-        if (WardenNavy.variant() != null) {
+        if (Navy.variant() != null) {
             // The IDE decides whether to lay the window out as islands before a theme from a plugin
             // is in place, and remembers the answer. Applying the theme once more makes it look again;
             // without this the islands are gone after every restart.
@@ -29,6 +29,6 @@ class WardenNavyListener : LafManagerListener, AppLifecycleListener, PowerSaveMo
     }
 
     override fun powerSaveStateChanged() {
-        if (!WardenNavy.effectsAllowed()) Effects.stopAll()
+        if (!Navy.effectsAllowed()) Effects.stopAll()
     }
 }

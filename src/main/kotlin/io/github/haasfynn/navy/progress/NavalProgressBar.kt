@@ -1,7 +1,7 @@
-package io.github.haasfynn.wardennavy.progress
+package io.github.haasfynn.navy.progress
 
-import io.github.haasfynn.wardennavy.WardenNavy
-import io.github.haasfynn.wardennavy.settings.WardenNavySettings
+import io.github.haasfynn.navy.Navy
+import io.github.haasfynn.navy.settings.NavySettings
 import javax.swing.UIManager
 
 /** Switches the naval progress bar on while a Warden Navy theme is active, and off otherwise. */
@@ -10,7 +10,7 @@ object NavalProgressBar {
     private const val PLATFORM_UI = "com.intellij.ide.ui.laf.darcula.ui.DarculaProgressBarUI"
 
     fun sync() {
-        if (WardenNavySettings.navalProgressBar && WardenNavy.variant() != null) install() else uninstall()
+        if (NavySettings.navalProgressBar && Navy.variant() != null) install() else uninstall()
     }
 
     fun uninstall() {

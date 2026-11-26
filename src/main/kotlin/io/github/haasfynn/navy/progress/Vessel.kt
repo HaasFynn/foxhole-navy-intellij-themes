@@ -1,4 +1,4 @@
-package io.github.haasfynn.wardennavy.progress
+package io.github.haasfynn.navy.progress
 
 import java.awt.geom.Path2D
 

@@ -1,4 +1,4 @@
-package io.github.haasfynn.wardennavy.effects
+package io.github.haasfynn.navy.effects
 
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.AnAction
@@ -8,8 +8,8 @@ import com.intellij.openapi.actionSystem.DataContext
 import com.intellij.openapi.actionSystem.ex.AnActionListener
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.EditorKind
-import io.github.haasfynn.wardennavy.WardenNavy
-import io.github.haasfynn.wardennavy.settings.WardenNavySettings
+import io.github.haasfynn.navy.Navy
+import io.github.haasfynn.navy.settings.NavySettings
 import java.lang.ref.WeakReference
 import javax.swing.Timer
 
@@ -20,14 +20,14 @@ import javax.swing.Timer
 class EditorEffects : AnActionListener {
 
     override fun afterEditorTyping(c: Char, dataContext: DataContext) {
-        if (!WardenNavySettings.bubbles) return
+        if (!NavySettings.bubbles) return
         val editor = CommonDataKeys.EDITOR.getData(dataContext) ?: return
         typedIn = WeakReference(editor)
         typingPause.restart()
     }
 
     override fun beforeActionPerformed(action: AnAction, event: AnActionEvent) {
-        if (!WardenNavySettings.torpedo || ActionManager.getInstance().getId(action) != DELETE_LINE) return
+        if (!NavySettings.torpedo || ActionManager.getInstance().getId(action) != DELETE_LINE) return
         val editor = event.getData(CommonDataKeys.EDITOR) ?: return
         torpedo(editor)
     }
@@ -42,7 +42,7 @@ class EditorEffects : AnActionListener {
         private val typingPause = Timer(PAUSE_MILLIS) { typedIn.get()?.let(::bubbles) }.apply { isRepeats = false }
 
         private fun usable(editor: Editor) =
-            WardenNavy.effectsAllowed() && !editor.isDisposed && editor.editorKind == EditorKind.MAIN_EDITOR &&
+            Navy.effectsAllowed() && !editor.isDisposed && editor.editorKind == EditorKind.MAIN_EDITOR &&
                 editor.contentComponent.isShowing
 
         /** Lets a few bubbles rise from the caret, but not more often than every second or so. */

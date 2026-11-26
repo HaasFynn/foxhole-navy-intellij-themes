@@ -1,9 +1,9 @@
-package io.github.haasfynn.wardennavy.progress
+package io.github.haasfynn.navy.progress
 
 import com.intellij.ui.JBColor
 import com.intellij.util.ui.JBUI
-import io.github.haasfynn.wardennavy.Variant
-import io.github.haasfynn.wardennavy.WardenNavy
+import io.github.haasfynn.navy.Variant
+import io.github.haasfynn.navy.Navy
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.Dimension
@@ -91,7 +91,7 @@ class NavalProgressBarUI : BasicProgressBarUI() {
         private val flat = height < JBUI.scale(MIN_WAVE_BAR)
         private val margin = JBUI.scale(if (flat) 1 else 3).toDouble()
         private val scale = (height - margin) / Vessel.GRID_HEIGHT
-        private val vessel = if (WardenNavy.variant() == Variant.NAKKI) Vessel.SUBMARINE else Vessel.SHIP
+        private val vessel = if (Navy.variant() == Variant.NAKKI) Vessel.SUBMARINE else Vessel.SHIP
         private val vesselTop = top + if (flat) 0.0 else JBUI.scale(1).toDouble()
         private val waterY = vesselTop + vessel.waterline * scale
         private val scaled: Shape = AffineTransform.getScaleInstance(scale, scale).createTransformedShape(vessel.shape)

@@ -1,4 +1,4 @@
-package io.github.haasfynn.wardennavy.effects
+package io.github.haasfynn.navy.effects
 
 import com.intellij.openapi.diagnostic.Logger
 import javax.swing.Timer
