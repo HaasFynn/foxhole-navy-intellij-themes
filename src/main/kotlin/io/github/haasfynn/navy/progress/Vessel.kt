@@ -49,38 +49,55 @@ internal class Vessel(val shape: Path2D, val waterline: Double) {
             lineTo(14.2, 2.4); closePath()
         }, waterline = 4.4)
 
-        /** Colonial destroyer: raised bow, boxy turrets, a block bridge and two slim upright funnels. */
+        /**
+         * Colonial destroyer: stubby hull with a raised forecastle, large faceted turrets, an angular
+         * bridge with the mast right behind it and two fat funnels.
+         */
         val DESTROYER = Vessel(Path2D.Double().apply {
-            // hull with a rounded stern and a bow that sweeps up
-            moveTo(0.6, 6.4); quadTo(0.0, 8.6, 1.6, 10.0); lineTo(22.6, 10.0); lineTo(26.0, 4.4)
-            lineTo(20.2, 5.6); lineTo(20.2, 6.4); closePath()
-            // bridge with its angled top
-            moveTo(13.6, 6.4); lineTo(13.6, 2.6); lineTo(14.2, 1.8); lineTo(15.6, 1.8); lineTo(16.2, 2.6)
-            lineTo(16.2, 6.4); closePath()
-            // pole mast with the radar frame
-            moveTo(12.4, 6.4); lineTo(12.4, 0.0); lineTo(12.9, 0.0); lineTo(12.9, 6.4); closePath()
-            moveTo(11.6, 0.4); lineTo(13.7, 0.4); lineTo(13.7, 1.5); lineTo(11.6, 1.5); closePath()
-            // two funnels
-            moveTo(7.8, 6.4); lineTo(7.8, 2.2); lineTo(9.1, 2.2); lineTo(9.1, 6.4); closePath()
-            moveTo(10.0, 6.4); lineTo(10.0, 2.2); lineTo(11.3, 2.2); lineTo(11.3, 6.4); closePath()
-            // fore and aft turrets
-            moveTo(17.2, 5.9); lineTo(17.7, 4.4); lineTo(19.7, 4.4); lineTo(20.2, 5.6); closePath()
-            moveTo(2.8, 6.4); lineTo(3.3, 4.9); lineTo(5.5, 4.9); lineTo(6.0, 6.4); closePath()
+            // hull: rounded stern, step up to the forecastle, raked bow
+            moveTo(0.4, 6.6); quadTo(0.0, 8.8, 1.4, 10.0); lineTo(24.6, 10.0); lineTo(26.0, 4.6)
+            lineTo(12.2, 5.6); lineTo(11.2, 6.6); closePath()
+            // aft turret
+            moveTo(2.0, 6.6); lineTo(2.3, 5.2); lineTo(4.4, 5.2); lineTo(4.7, 6.6); closePath()
+            // two funnels with their caps
+            moveTo(8.4, 6.6); lineTo(8.2, 2.6); lineTo(8.0, 2.6); lineTo(8.0, 2.1); lineTo(9.9, 2.1)
+            lineTo(9.9, 2.6); lineTo(9.7, 2.6); lineTo(9.9, 6.6); closePath()
+            moveTo(10.2, 6.4); lineTo(10.0, 2.6); lineTo(9.8, 2.6); lineTo(9.8, 2.1); lineTo(11.7, 2.1)
+            lineTo(11.7, 2.6); lineTo(11.5, 2.6); lineTo(11.7, 6.0); closePath()
+            // mast
+            moveTo(12.2, 5.6); lineTo(12.2, 0.0); lineTo(12.7, 0.0); lineTo(12.7, 5.6); closePath()
+            moveTo(11.6, 1.0); lineTo(13.3, 1.0); lineTo(13.3, 1.4); lineTo(11.6, 1.4); closePath()
+            // bridge with the director on top
+            moveTo(13.0, 5.6); lineTo(13.0, 2.9); lineTo(13.5, 2.1); lineTo(15.7, 2.1); lineTo(16.2, 2.9)
+            lineTo(16.2, 5.4); closePath()
+            moveTo(14.1, 2.1); lineTo(14.1, 1.4); lineTo(15.1, 1.4); lineTo(15.1, 2.1); closePath()
+            // small turret on its platform, then the fore turret
+            moveTo(16.2, 5.4); lineTo(16.2, 4.3); lineTo(16.8, 4.3); lineTo(17.0, 3.6); lineTo(18.3, 3.6)
+            lineTo(18.5, 4.3); lineTo(19.2, 5.2); closePath()
+            moveTo(20.0, 5.1); lineTo(20.3, 3.5); lineTo(22.6, 3.5); lineTo(23.2, 4.9); closePath()
         }, waterline = 10.0)
 
-        /** Colonial submarine: long, slab-sided and sharp-edged, with a small box tower. */
+        /**
+         * Colonial submarine: long and slab-sided with a pointed stern and a blunt bow, a stepped
+         * box tower amidships, a ramp falling away forward of it and a cargo hatch block.
+         */
         val ANGULAR_SUBMARINE = Vessel(Path2D.Double().apply {
             // hull
-            moveTo(0.0, 7.6); lineTo(1.8, 5.4); lineTo(24.4, 5.4); lineTo(28.6, 7.6); lineTo(24.4, 10.0)
-            lineTo(1.8, 10.0); closePath()
-            // box tower
-            moveTo(12.4, 5.4); lineTo(12.7, 2.2); lineTo(15.9, 2.2); lineTo(16.4, 5.4); closePath()
-            // cargo hatch block and deck turret
-            moveTo(17.4, 5.4); lineTo(17.4, 4.5); lineTo(21.2, 4.5); lineTo(21.2, 5.4); closePath()
-            moveTo(22.0, 5.4); lineTo(22.3, 4.2); lineTo(23.8, 4.2); lineTo(24.1, 5.4); closePath()
+            moveTo(0.0, 7.4); lineTo(2.4, 5.8); lineTo(27.4, 5.8); lineTo(28.4, 5.3); lineTo(28.8, 7.4)
+            quadTo(28.4, 10.0, 27.0, 10.0); lineTo(2.2, 10.0); closePath()
+            // raised casing
+            moveTo(5.0, 5.8); lineTo(5.4, 5.2); lineTo(26.2, 5.2); lineTo(27.0, 5.8); closePath()
+            // stepped tower
+            moveTo(12.6, 5.2); lineTo(12.6, 3.6); lineTo(15.6, 3.6); lineTo(15.6, 5.2); closePath()
+            moveTo(13.0, 3.6); lineTo(13.0, 2.3); lineTo(14.8, 2.3); lineTo(14.8, 3.6); closePath()
             // periscopes
-            moveTo(13.5, 2.2); lineTo(13.5, 0.0); lineTo(14.0, 0.0); lineTo(14.0, 2.2); closePath()
-            moveTo(14.8, 2.2); lineTo(14.8, 0.7); lineTo(15.2, 0.7); lineTo(15.2, 2.2); closePath()
-        }, waterline = 4.6)
+            moveTo(13.2, 2.3); lineTo(13.2, 0.0); lineTo(13.6, 0.0); lineTo(13.6, 2.3); closePath()
+            moveTo(13.9, 2.3); lineTo(13.9, 0.6); lineTo(14.2, 0.6); lineTo(14.2, 2.3); closePath()
+            // ramp forward of the tower
+            moveTo(15.6, 4.0); lineTo(19.6, 5.2); lineTo(15.6, 5.2); closePath()
+            // cargo hatch block and the bow bulwark
+            moveTo(20.4, 5.2); lineTo(20.4, 4.4); lineTo(23.8, 4.4); lineTo(23.8, 5.2); closePath()
+            moveTo(24.4, 5.2); lineTo(24.6, 4.6); lineTo(26.8, 5.1); lineTo(27.0, 5.2); closePath()
+        }, waterline = 4.8)
     }
 }
