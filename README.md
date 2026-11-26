@@ -1,30 +1,59 @@
 # Warden Navy
 
-Two dark IntelliJ Platform themes inspired by the Warden navy of the game Foxhole.
+Two dark themes for IntelliJ-based IDEs, inspired by the Warden navy of the game Foxhole: a warship's bridge and a submarine's control room.
+
+![Warden Navy Blacksteele](docs/blacksteele.png)
+
+![Warden Navy Nakki](docs/nakki.png)
 
 | Theme | Mood |
 |---|---|
 | **Warden Navy Blacksteele** | Gunmetal hull, wooden deck, banner blue |
 | **Warden Navy Nakki** | Deep water, sonar green, periscope glass |
 
-Fan-made. Not affiliated with or endorsed by Siege Camp. All artwork in this repository is original.
+This is a fan project. It is not affiliated with or endorsed by Siege Camp. See [Licence and disclaimer](#licence-and-disclaimer).
 
-## What is themed
+## Install
 
-- **IDE chrome**: every component, recoloured through the colour ramps of the parent theme *Islands Dark*.
-- **Editor colour scheme**: syntax, inspections, diff, VCS, debugger, console and terminal colours.
-- **Background artwork**: a sea chart with depth contours and soundings runs faintly behind the code and the tool windows, with a sonar display and a warship or submarine in the corner. The empty frame shows the sonar on its own, stronger.
-- **Icons**: 48 nautical icons. Breakpoints are sea mines, folders are crates, tool windows get a sea chart, logbook, ship's bell, periscope and more. Platform icons take the palette colours.
-- **Progress bar**: a ship (Blacksteele) or a submarine running awash (Nakki) makes its way along the water. For indeterminate progress it crosses the bar again and again.
-- **Air bubbles**: a few bubbles rise from the caret when you pause typing.
-- **Torpedo**: deleting a line (*Delete Line*) sends a torpedo along it to the left, where it goes off against the edge of the editor.
+Requires an IntelliJ-based IDE, version 2026.2 or newer (IntelliJ IDEA, PyCharm, WebStorm, Rider and the others).
+
+1. Download `warden-navy-theme-<version>.zip` from the [latest release](https://github.com/HaasFynn/foxhole-warden-intellij-theme/releases/latest). Do not unpack it.
+2. In the IDE, open **Settings | Plugins**, click the gear icon and choose **Install Plugin from Disk…**. Select the ZIP.
+3. Pick a theme under **Settings | Appearance & Behavior | Appearance**.
+
+## What you get
+
+- **IDE and editor colours**: every part of the IDE, plus syntax, inspections, diff, version control, debugger, console and terminal.
+- **Background**: a sea chart with depth contours and soundings runs faintly behind the code and the tool windows, with a sonar display and a warship or submarine in the corner.
+- **Icons**: 45 nautical icons. Breakpoints are sea mines, folders are crates, and the tool windows get a sea chart, a logbook, a ship's bell, a periscope and more.
+
+  ![Icon set](docs/icons.png)
+
+- **Progress bar**: a ship (Blacksteele) or a submarine running awash (Nakki) makes its way along the water.
+
+  ![Progress bars](docs/progress.png)
+
 - **Sonar ping**: when a build or a run finishes, rings spread across the sonar display, green on success and red on failure.
+
+  ![Sonar ping](docs/sonar-ping.png)
+
+- **Air bubbles**: a few bubbles rise from the caret when you pause typing.
+
+  ![Air bubbles](docs/bubbles.png)
+
+- **Torpedo**: *Delete Line* sends a torpedo along the line to the left, where it goes off against the edge of the editor.
 - **Telegram notifications**: balloons look like radio telegram slips, paper-toned with a brass edge.
-- **Depth gauge**: a status bar widget that shows how deep the caret is in the file, one metre per line. Hide it from the status bar's context menu.
+- **Depth gauge**: a status bar widget that shows how deep the caret is in the file, one metre per line.
 
-The effects play for a second or two and leave nothing running in between. Each can be switched off under **Settings | Appearance & Behavior | Warden Navy**; all are off in Power Save Mode.
+## Settings
 
-## Build
+The effects play for a second or two and leave nothing running in between. Each one, and the progress bar, can be switched off under **Settings | Appearance & Behavior | Warden Navy**. All effects are off in Power Save Mode. The depth gauge can be hidden from the status bar's context menu.
+
+![Settings](docs/settings.png)
+
+Everything except the colours only applies while one of the two themes is active.
+
+## Build from source
 
 Requires JDK 25.
 
@@ -37,24 +66,15 @@ Requires JDK 25.
 To watch the effects without typing or building, start the sandbox with
 `IDE_JVM_ARGS="-Dwardennavy.demo=bubbles,torpedo,ping" ./gradlew runIde`; it replays them every few seconds.
 
-Install the ZIP via **Settings | Plugins | ⚙ | Install Plugin from Disk…**, then pick a theme under **Settings | Appearance & Behavior | Appearance**.
+### How it is put together
 
-## How the themes are generated
+- **Colours** live in `palettes/<variant>.properties`. The build expands every palette through the templates in `src/main/templates` into one UI theme (`*.theme.json`) and one editor colour scheme (`*.xml`). To add a variant, add a palette file and a `themeProvider` entry in `src/main/resources/META-INF/plugin.xml`. `scripts/contrast.py` checks every palette against WCAG contrast ratios.
+- **Artwork**: the sonar displays are drawn as SVG in `art/`, and the sea chart around them is generated by `scripts/draw-chart.py`. `scripts/render-art.sh` renders both to `src/main/resources/images` (needs `rsvg-convert` from librsvg). How strongly the artwork shows is set by `transparency` under `background` and `emptyFrameBackground` in `src/main/templates/WardenNavy.theme.json`.
+- **Icons** are drawn by `python3 scripts/draw-icons.py`, which also writes `src/main/icons.json`, the list of platform icons they replace. Add `--overview` to refresh `docs/icons.png`.
+- **Effects, progress bar and depth gauge** are Kotlin code under `src/main/kotlin`.
 
-Colours live in `palettes/<variant>.properties`. The build expands every palette through the templates in `src/main/templates` into one UI theme (`*.theme.json`) and one editor colour scheme (`*.xml`). To add a variant, add a palette file and a `themeProvider` entry in `src/main/resources/META-INF/plugin.xml`.
+## Licence and disclaimer
 
-## Artwork
+The code and all artwork in this repository are released under the [MIT Licence](LICENSE). All artwork was drawn for this project; it contains no assets from the game.
 
-The sonar displays are drawn as SVG in `art/`. The sea chart around them is generated by `scripts/draw-chart.py`. Both are rendered to `src/main/resources/images` with:
-
-```sh
-scripts/render-art.sh   # needs rsvg-convert (librsvg)
-```
-
-How strongly the artwork shows is set by `transparency` under `background` (behind the editor) and `emptyFrameBackground` in `src/main/templates/WardenNavy.theme.json`.
-
-The icons are drawn by `python3 scripts/draw-icons.py`, which also writes `src/main/icons.json`, the list of platform icons they replace. Add `--overview` to refresh the sheet below.
-
-![Icon set](docs/icons.png)
-
-`scripts/contrast.py` checks every palette against WCAG contrast ratios.
+Warden Navy is an unofficial fan project. It is not affiliated with, endorsed by or sponsored by Siege Camp. Foxhole and the names of its factions and vessels are the property of their respective owners and are used here only to describe what inspired the themes.

@@ -2,17 +2,33 @@
   <id>io.github.haasfynn.wardennavy</id>
   <name>Warden Navy</name>
   <category>UI</category>
-  <vendor url="https://github.com/HaasFynn">HaasFynn</vendor>
+  <vendor url="https://github.com/HaasFynn/foxhole-warden-intellij-theme">HaasFynn</vendor>
 
   <description><![CDATA[
-    <p>Two dark naval themes inspired by the Warden navy of the game Foxhole.</p>
+    <p>Two dark naval themes inspired by the Warden navy of the game Foxhole: a warship's bridge and a
+    submarine's control room.</p>
     <ul>
       <li><b>Warden Navy Blacksteele</b>: gunmetal hull, wooden deck and banner blue.</li>
       <li><b>Warden Navy Nakki</b>: deep water, sonar green and periscope glass.</li>
     </ul>
-    <p>Each theme ships a matching editor colour scheme, background artwork, icons and a naval progress bar.</p>
-    <p>Fan-made. Not affiliated with or endorsed by Siege Camp.</p>
+    <p>Each theme comes with its own editor colour scheme and with:</p>
+    <ul>
+      <li>a sea chart background with a sonar display and a warship or submarine,</li>
+      <li>45 nautical icons, with sea mines for breakpoints and crates for folders,</li>
+      <li>a progress bar with a ship or submarine on the waterline,</li>
+      <li>short effects: air bubbles when typing pauses, a torpedo on Delete Line and a sonar ping when a
+      build or run finishes,</li>
+      <li>notifications styled as radio telegram slips and a depth gauge in the status bar.</li>
+    </ul>
+    <p>The progress bar and every effect can be switched off under
+    Settings | Appearance &amp; Behavior | Warden Navy. Effects are off in Power Save Mode.</p>
+    <p>An unofficial fan project. Not affiliated with, endorsed by or sponsored by Siege Camp. All artwork
+    is original.</p>
   ]]></description>
+
+  <change-notes><![CDATA[
+    <p><b>1.0.0</b>: first public release.</p>
+  ]]></change-notes>
 
   <depends>com.intellij.modules.platform</depends>
 
