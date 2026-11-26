@@ -13,7 +13,7 @@ class NavyConfigurable : BoundConfigurable("Warden & Colonial Navy") {
             row {
                 checkBox("Show progress as a vessel on the waterline")
                     .bindSelected(NavySettings::navalProgressBar)
-                    .comment("A ship in Blacksteele, a submarine in Nakki. Bars that are already visible keep their look.")
+                    .comment("A surface ship or a submarine, depending on the theme. Bars that are already visible keep their look.")
             }
         }
         group("Effects") {
