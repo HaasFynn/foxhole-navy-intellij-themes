@@ -2,31 +2,35 @@
   <id>io.github.haasfynn.navy</id>
   <name>Warden &amp; Colonial Navy</name>
   <category>UI</category>
-  <vendor url="https://github.com/HaasFynn/foxhole-warden-intellij-theme">HaasFynn</vendor>
+  <vendor url="https://github.com/HaasFynn/foxhole-navy-intellij-themes">HaasFynn</vendor>
 
   <description><![CDATA[
-    <p>Two dark naval themes inspired by the Warden navy of the game Foxhole: a warship's bridge and a
-    submarine's control room.</p>
+    <p>Four dark naval themes inspired by the two navies of the game Foxhole. Each faction gets a surface
+    ship and a submarine.</p>
     <ul>
       <li><b>Warden Navy Blacksteele</b>: gunmetal hull, wooden deck and banner blue.</li>
       <li><b>Warden Navy Nakki</b>: deep water, sonar green and periscope glass.</li>
+      <li><b>Colonial Navy Conqueror</b>: khaki steel, Colonial green and ochre.</li>
+      <li><b>Colonial Navy Trident</b>: deep green water, sonar mint and pale deck paint.</li>
     </ul>
     <p>Each theme comes with its own editor colour scheme and with:</p>
     <ul>
-      <li>a sea chart background with a sonar display and a warship or submarine,</li>
+      <li>a sea chart background with a sonar display that shows the theme's vessel,</li>
       <li>45 nautical icons, with sea mines for breakpoints and crates for folders,</li>
-      <li>a progress bar with a ship or submarine on the waterline,</li>
+      <li>a progress bar on which the vessel makes its way along the water,</li>
       <li>short effects: air bubbles when typing pauses, a torpedo on Delete Line and a sonar ping when a
       build or run finishes,</li>
       <li>notifications styled as radio telegram slips and a depth gauge in the status bar.</li>
     </ul>
     <p>The progress bar and every effect can be switched off under
-    Settings | Appearance &amp; Behavior | Warden Navy. Effects are off in Power Save Mode.</p>
+    Settings | Appearance &amp; Behavior | Warden &amp; Colonial Navy. Effects are off in Power Save Mode.</p>
     <p>An unofficial fan project. Not affiliated with, endorsed by or sponsored by Siege Camp. All artwork
     is original.</p>
   ]]></description>
 
   <change-notes><![CDATA[
+    <p><b>2.0.0</b>: adds the Colonial Navy themes Conqueror and Trident and redraws all four vessels.
+    The plugin has a new name and id; uninstall Warden Navy 1.0.0 before installing this version.</p>
     <p><b>1.0.0</b>: first public release.</p>
   ]]></change-notes>
 

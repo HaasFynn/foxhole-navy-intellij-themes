@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.0
+
+The plugin is now called **Warden & Colonial Navy** and covers both factions.
+
+- Two new themes: **Colonial Navy Conqueror** (destroyer) and **Colonial Navy Trident** (submarine), each with its own editor colour scheme, sea chart, sonar display and progress bar vessel.
+- All four vessels were redrawn with the ships in the game as reference.
+- The Colonial sonar displays have wedge marks around the rim.
+
+**Upgrading from 1.0.0:** the plugin has a new id, so the IDE treats it as a different plugin. Uninstall *Warden Navy* before installing this version, then pick your theme and set the switches again.
+
 ## 1.0.0
 
 First public release.

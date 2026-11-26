@@ -16,7 +16,9 @@ body:
       options:
         - Warden Navy Blacksteele
         - Warden Navy Nakki
-        - Both
+        - Colonial Navy Conqueror
+        - Colonial Navy Trident
+        - Several or all
     validations:
       required: true
   - type: input
