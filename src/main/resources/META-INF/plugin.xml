@@ -35,6 +35,8 @@
   <extensions defaultExtensionNs="com.intellij">
     <themeProvider id="io.github.haasfynn.navy.blacksteele" path="/themes/Blacksteele.theme.json" targetUi="islands"/>
     <themeProvider id="io.github.haasfynn.navy.nakki" path="/themes/Nakki.theme.json" targetUi="islands"/>
+    <themeProvider id="io.github.haasfynn.navy.conqueror" path="/themes/Conqueror.theme.json" targetUi="islands"/>
+    <themeProvider id="io.github.haasfynn.navy.trident" path="/themes/Trident.theme.json" targetUi="islands"/>
     <applicationConfigurable parentId="appearance" id="io.github.haasfynn.navy.settings"
                              instance="io.github.haasfynn.navy.settings.NavyConfigurable"
                              displayName="Warden &amp; Colonial Navy"/>

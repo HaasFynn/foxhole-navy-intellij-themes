@@ -20,7 +20,7 @@ LEVELS = [-0.9, -0.6, -0.3, 0.0, 0.3, 0.6, 0.9]
 # radius including the tick marks.
 SONAR_CENTRE, SONAR_RADIUS = 283, 246
 
-VARIANTS = {"Blacksteele": "#6FA3D4", "Nakki": "#4FD1B5"}
+VARIANTS = {"Blacksteele": "#6FA3D4", "Nakki": "#4FD1B5", "Conqueror": "#8CBF7A", "Trident": "#6FE0A0"}
 
 
 def sea_floor(seed):

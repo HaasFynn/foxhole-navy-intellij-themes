@@ -2,7 +2,6 @@ package io.github.haasfynn.navy.progress
 
 import com.intellij.ui.JBColor
 import com.intellij.util.ui.JBUI
-import io.github.haasfynn.navy.Variant
 import io.github.haasfynn.navy.Navy
 import java.awt.BasicStroke
 import java.awt.Color
@@ -24,9 +23,9 @@ import kotlin.math.max
 import kotlin.math.min
 
 /**
- * Draws progress as a vessel making its way along the water: a ship on the surface in Blacksteele,
- * a submarine running awash in Nakki. For indeterminate progress the vessel crosses the bar again
- * and again, trailing a wake.
+ * Draws progress as a vessel making its way along the water: a surface ship or a submarine running
+ * awash, in the shape that belongs to the active theme. For indeterminate progress the vessel
+ * crosses the bar again and again, trailing a wake.
  */
 class NavalProgressBarUI : BasicProgressBarUI() {
 
@@ -91,7 +90,7 @@ class NavalProgressBarUI : BasicProgressBarUI() {
         private val flat = height < JBUI.scale(MIN_WAVE_BAR)
         private val margin = JBUI.scale(if (flat) 1 else 3).toDouble()
         private val scale = (height - margin) / Vessel.GRID_HEIGHT
-        private val vessel = if (Navy.variant() == Variant.NAKKI) Vessel.SUBMARINE else Vessel.SHIP
+        private val vessel = Vessel.of(Navy.variant())
         private val vesselTop = top + if (flat) 0.0 else JBUI.scale(1).toDouble()
         private val waterY = vesselTop + vessel.waterline * scale
         private val scaled: Shape = AffineTransform.getScaleInstance(scale, scale).createTransformedShape(vessel.shape)
