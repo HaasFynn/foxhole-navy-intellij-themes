@@ -22,6 +22,10 @@ jobs:
         run: python3 scripts/contrast.py
       - name: Build the plugin
         run: ./gradlew buildPlugin
+      - name: Make room for the IDEs the verifier downloads
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          df -h /
       - name: Verify against the supported IDEs
         run: ./gradlew verifyPlugin
       - uses: actions/upload-artifact@v4
