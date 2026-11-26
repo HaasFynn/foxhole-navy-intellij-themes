@@ -18,6 +18,12 @@ class WardenNavyListener : LafManagerListener, AppLifecycleListener, PowerSaveMo
     }
 
     override fun appFrameCreated(commandLineArgs: List<String>) {
+        if (WardenNavy.variant() != null) {
+            // The IDE decides whether to lay the window out as islands before a theme from a plugin
+            // is in place, and remembers the answer. Applying the theme once more makes it look again;
+            // without this the islands are gone after every restart.
+            LafManager.getInstance().updateUI()
+        }
         NavalProgressBar.sync()
         Demo.startIfRequested()
     }
